@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public record UserRequestDto(
-        UUID id,
         String firstName,
         String middleName,
         String lastName,
