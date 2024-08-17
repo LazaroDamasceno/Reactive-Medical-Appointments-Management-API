@@ -9,6 +9,7 @@ public class UserResponseMapper {
         return new UserResponseDto(
                 user.getFullName(),
                 user.getBirthDate(),
+                user.getSsn(),
                 user.getEmail(),
                 user.getPhoneNumber(),
                 user.getGender()

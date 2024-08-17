@@ -62,7 +62,7 @@ public class User {
         this.gender = gender;
     }
 
-    public void update(@Valid UpdateUserRequestDto dto) {
+    public User update(@Valid UpdateUserRequestDto dto) {
         this.firstName = dto.firstName();
         this.middleName = dto.middleName();
         this.lastName = dto.lastName();
@@ -70,6 +70,7 @@ public class User {
         this.email = dto.email();
         this.phoneNumber = dto.phoneNumber();
         this.gender = dto.gender();
+        return this;
     }
 
     public String getFullName() {

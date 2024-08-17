@@ -1,4 +1,4 @@
-package com.api.v1.patient;
+package com.api.v1.patient.exceptions;
 
 import com.api.v1.user.annotations.SSN;
 

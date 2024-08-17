@@ -1,11 +1,10 @@
 package com.api.v1.patient.utils;
 
-import com.api.v1.patient.PatientNotFoundException;
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.domain.PatientRepository;
-import com.api.v1.user.domain.User;
+import com.api.v1.patient.exceptions.PatientNotFoundException;
+import com.api.v1.user.annotations.SSN;
 import com.api.v1.user.domain.UserRepository;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
@@ -14,18 +13,17 @@ import reactor.core.publisher.Mono;
 public class PatientFinderUtil {
 
     @Autowired
-    private PatientRepository repository;
+    private PatientRepository patientRepository;
 
     @Autowired
     private UserRepository userRepository;
 
-    public Mono<Patient> find(@NotNull User user) {
+    public Mono<Patient> find(@SSN String ssn) {
         return userRepository
-                .findBySsn(user.getSsn())
-                .hasElement()
-                .flatMap(exists -> {
-                    if (exists) return repository.findByPatient(user);
-                    else return Mono.error(new PatientNotFoundException(user.getSsn()));
+                .findBySsn(ssn)
+                .switchIfEmpty(Mono.error(new PatientNotFoundException(ssn)))
+                .flatMap(user -> {
+                    return patientRepository.findByPatient(user);
                 });
 
     }
