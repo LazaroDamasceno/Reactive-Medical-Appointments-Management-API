@@ -10,7 +10,6 @@ import java.util.UUID;
 
 public interface PatientRepository extends ReactiveCrudRepository<Patient, UUID> {
 
-    @Query("{ 'user': {$eq user} }")
-    Mono<Patient> findByPatient(@NotNull User user);
+    Mono<Patient> findByUser(User user);
 
 }

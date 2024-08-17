@@ -25,6 +25,11 @@ public class Patient {
         this.user = user;
     }
 
+    public void update(String address, User user) {
+        this.address = address;
+        this.user = user;
+    }
+
     public UUID getId() {
         return id;
     }
