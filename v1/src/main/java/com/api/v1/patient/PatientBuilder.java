@@ -2,8 +2,6 @@ package com.api.v1.patient;
 
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.user.domain.User;
-import com.api.v1.user.dtos.NewUserRequestDto;
-import jakarta.validation.Valid;
 
 import java.util.UUID;
 
