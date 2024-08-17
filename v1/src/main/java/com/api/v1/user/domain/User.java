@@ -60,4 +60,11 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.gender = gender;
     }
+
+    public String getFullName() {
+        if (middleName == null) {
+            return "%s %s".formatted(firstName, lastName);
+        }
+        return "%s %s %s".formatted(firstName, middleName, lastName);
+    }
 }
