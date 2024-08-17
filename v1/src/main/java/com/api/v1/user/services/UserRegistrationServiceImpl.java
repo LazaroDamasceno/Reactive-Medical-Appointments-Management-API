@@ -7,7 +7,6 @@ import com.api.v1.user.dtos.NewUserRequestDto;
 import com.api.v1.user.dtos.UserResponseDto;
 import com.api.v1.user.exceptions.DuplicatedSsnException;
 import com.api.v1.user.mappers.UserResponseMapper;
-import com.api.v1.user.utils.UserFinderUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
