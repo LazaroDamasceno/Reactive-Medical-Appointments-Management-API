@@ -14,7 +14,7 @@ import java.util.UUID;
 public class User {
 
     @Id
-    private UUID id;
+    private final UUID id;
 
     @Field
     private String firstName;
@@ -73,7 +73,7 @@ public class User {
     }
 
     public String getFullName() {
-        if (middleName == null) {
+        if (middleName.isEmpty()) {
             return "%s %s".formatted(firstName, lastName);
         }
         return "%s %s %s".formatted(firstName, middleName, lastName);
