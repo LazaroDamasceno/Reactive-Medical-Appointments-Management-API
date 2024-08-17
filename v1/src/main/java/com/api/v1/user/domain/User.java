@@ -1,5 +1,7 @@
 package com.api.v1.user.domain;
 
+import com.api.v1.user.dtos.UpdateUserRequestDto;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -58,6 +60,16 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
+    }
+
+    public void update(@Valid UpdateUserRequestDto dto) {
+        this.firstName = dto.firstName();
+        this.middleName = dto.middleName();
+        this.lastName = dto.lastName();
+        this.birthDate = dto.birthDate();
+        this.email = dto.email();
+        this.phoneNumber = dto.phoneNumber();
+        this.gender = dto.gender();
     }
 
     public String getFullName() {
