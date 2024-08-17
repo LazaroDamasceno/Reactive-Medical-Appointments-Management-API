@@ -33,16 +33,21 @@ class PatientRegistrationServiceImpl implements PatientRegistrationService {
                 .findBySsn(dto.userDto().ssn())
                 .hasElement()
                 .flatMap(exists -> {
-                    if (exists) return Mono.error(DuplicatedSsnException::new);
+                    if (exists) return handleDuplicatedSsn();
                     else return handleRegistration(dto);
                 });
+    }
+
+    private Mono<PatientResponseDto> handleDuplicatedSsn() {
+        return Mono.error(DuplicatedSsnException::new);
     }
 
     private Mono<PatientResponseDto> handleRegistration(NewPatientRequestDto dto) {
         return Mono.defer(() -> {
             User newUser = UserBuilder.createFromDto(dto.userDto()).build();
             Mono<User> savedUser = userRepository.save(newUser);
-            return Mono.zip(savedUser, Mono.just(dto.address()))
+            Mono<String> monoAddress = Mono.just(dto.address());
+            return Mono.zip(savedUser, monoAddress)
                     .flatMap(tuple -> {
                         User user = tuple.getT1();
                         String address = tuple.getT2();
