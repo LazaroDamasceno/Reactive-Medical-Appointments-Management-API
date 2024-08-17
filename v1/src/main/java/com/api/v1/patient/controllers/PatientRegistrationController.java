@@ -1,4 +1,4 @@
-package com.api.v1.patient;
+package com.api.v1.patient.controllers;
 
 import com.api.v1.patient.dtos.NewPatientRequestDto;
 import com.api.v1.patient.dtos.PatientResponseDto;
