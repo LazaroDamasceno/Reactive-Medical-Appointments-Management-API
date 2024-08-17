@@ -19,12 +19,9 @@ class UserRegistrationServiceImpl implements UserRegistrationService {
     @Autowired
     private UserRepository repository;
 
-    @Autowired
-    private UserFinderUtil userFinder;
-
     @Override
     public Mono<UserResponseDto> register(@Valid NewUserRequestDto dto) {
-        return userFinder
+        return repository
                 .findBySsn(dto.ssn())
                 .hasElement()
                 .flatMap(exists -> {

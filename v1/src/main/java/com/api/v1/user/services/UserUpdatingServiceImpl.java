@@ -5,7 +5,6 @@ import com.api.v1.user.domain.UserRepository;
 import com.api.v1.user.dtos.UpdateUserRequestDto;
 import com.api.v1.user.dtos.UserResponseDto;
 import com.api.v1.user.mappers.UserResponseMapper;
-import com.api.v1.user.utils.UserFinderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -14,14 +13,11 @@ import reactor.core.publisher.Mono;
 class UserUpdatingServiceImpl implements UserUpdatingService {
 
     @Autowired
-    private UserFinderUtil userFinder;
-
-    @Autowired
     private UserRepository repository;
 
     @Override
     public Mono<UserResponseDto> update(String ssn, UpdateUserRequestDto data) {
-        return userFinder
+        return repository
                 .findBySsn(ssn)
                 .flatMap(
                     b -> Mono.defer(() -> {
