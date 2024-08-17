@@ -1,4 +1,4 @@
-package com.api.v1.patient;
+package com.api.v1.patient.builders;
 
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.user.domain.User;

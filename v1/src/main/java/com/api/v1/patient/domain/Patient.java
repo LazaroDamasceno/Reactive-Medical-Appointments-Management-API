@@ -1,5 +1,6 @@
 package com.api.v1.patient.domain;
 
+import com.api.v1.patient.dtos.UpdatePatientRequestDto;
 import com.api.v1.user.domain.User;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,6 +22,11 @@ public class Patient {
 
     public Patient(UUID id, String address, User user) {
         this.id = id;
+        this.address = address;
+        this.user = user;
+    }
+
+    public void update(String address, User user) {
         this.address = address;
         this.user = user;
     }
