@@ -1,7 +1,7 @@
 package com.api.v1.patient.controllers;
 
 import com.api.v1.patient.dtos.PatientResponseDto;
-import com.api.v1.patient.services.FindAllPatientsService;
+import com.api.v1.patient.services.AllPatientsRetrievingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +12,10 @@ import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("api/v1/patients")
-public class FindAllPatientsController {
+public class AllPatientsRetrievingController {
 
     @Autowired
-    private FindAllPatientsService service;
+    private AllPatientsRetrievingService service;
 
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)

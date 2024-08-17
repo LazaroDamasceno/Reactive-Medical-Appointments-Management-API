@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
 @Service
-class FindAllPatientsServiceImpl implements FindAllPatientsService {
+class AllPatientsRetrievingServiceImpl implements AllPatientsRetrievingService {
 
     @Autowired
     private PatientRepository patientRepository;
