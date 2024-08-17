@@ -29,7 +29,7 @@ public class User {
     private LocalDate birthDate;
 
     @Field
-    private String ssn;
+    private final String ssn;
 
     @Field
     private String email;
