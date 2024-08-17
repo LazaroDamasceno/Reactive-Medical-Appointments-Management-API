@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Document(collection = "v1_users")
-@Getter
 public class User {
 
     @Id
@@ -67,4 +66,41 @@ public class User {
         }
         return "%s %s %s".formatted(firstName, middleName, lastName);
     }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public String getSsn() {
+        return ssn;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
 }
