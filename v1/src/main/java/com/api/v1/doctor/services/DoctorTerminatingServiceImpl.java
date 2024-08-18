@@ -10,7 +10,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-class DoctorTerminatorServiceImpl implements DoctorTerminatorService {
+class DoctorTerminatingServiceImpl implements DoctorTerminatingService {
 
     private final DoctorFinderUtil doctorFinderUtil;
     private final DoctorRepository doctorRepository;
