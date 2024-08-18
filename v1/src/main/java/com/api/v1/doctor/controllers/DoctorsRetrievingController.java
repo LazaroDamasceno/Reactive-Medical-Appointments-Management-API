@@ -1,6 +1,7 @@
 package com.api.v1.doctor.controllers;
 
 import com.api.v1.doctor.domain.Doctor;
+import com.api.v1.doctor.dtos.DoctorResponseDto;
 import com.api.v1.doctor.services.DoctorsRetrievingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class DoctorsRetrievingController {
 
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
-    public Flux<Doctor> findAll() {
+    public Flux<DoctorResponseDto> findAll() {
         return service.findAll();
     }
 
