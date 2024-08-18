@@ -7,7 +7,6 @@ import com.api.v1.doctor.domain.DoctorRepository;
 import com.api.v1.doctor.dtos.DoctorResponseDto;
 import com.api.v1.doctor.dtos.NewDoctorRequestDto;
 import com.api.v1.doctor.exceptions.DuplicatedLicenseNumberException;
-import com.api.v1.doctor.utils.DoctorFinderUtil;
 import com.api.v1.user.builder.UserBuilder;
 import com.api.v1.user.domain.User;
 import com.api.v1.user.domain.UserRepository;
@@ -22,33 +21,39 @@ class DoctorHiringServiceImpl implements DoctorHiringService {
 
     private final UserRepository userRepository;
     private final DoctorRepository doctorRepository;
-    private final DoctorFinderUtil doctorFinderUtil;
 
     @Override
     public Mono<DoctorResponseDto> hire(@Valid NewDoctorRequestDto dto) {
-        return doctorFinderUtil
-                .find(dto.doctorLicenseNumber())
-                .hasElement()
+        return doctorRepository
+                .findAll()
+                .filter(e -> e.getLicenseNumber().equals(dto.doctorLicenseNumber())
+                        && e.getTerminationDate() == null
+                        && e.isActive()
+                )
+                .hasElements()
                 .flatMap(exists -> {
                     if (exists) return handleDuplicatedLicenseNumber();
-                    else {
-                        User newUser = UserBuilder.createFromDto(dto.newUserDto()).build();
-                        return userRepository
-                                .save(newUser)
-                                .flatMap(user -> {
-                                    Doctor newDoctor = DoctorBuilder
-                                            .create()
-                                            .withUser(user)
-                                            .withLicenseNumber(dto.doctorLicenseNumber())
-                                            .build();
-                                    return doctorRepository.save(newDoctor);
-                                })
-                                .flatMap(doctor -> Mono.just(DoctorResponseMapper.map(doctor)));
-                }});
+                    else return handleHiring(dto);
+                });
     }
 
     private Mono<DoctorResponseDto> handleDuplicatedLicenseNumber() {
         return Mono.error(DuplicatedLicenseNumberException::new);
+    }
+
+    private Mono<DoctorResponseDto> handleHiring(NewDoctorRequestDto dto) {
+        User newUser = UserBuilder.createFromDto(dto.newUserDto()).build();
+        return userRepository
+                .save(newUser)
+                .flatMap(user -> {
+                    Doctor newDoctor = DoctorBuilder
+                            .create()
+                            .withUser(user)
+                            .withLicenseNumber(dto.doctorLicenseNumber())
+                            .build();
+                    return doctorRepository.save(newDoctor);
+                })
+                .flatMap(doctor -> Mono.just(DoctorResponseMapper.map(doctor)));
     }
 
 }
