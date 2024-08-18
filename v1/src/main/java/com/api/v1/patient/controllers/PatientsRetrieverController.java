@@ -1,7 +1,7 @@
 package com.api.v1.patient.controllers;
 
 import com.api.v1.patient.domain.Patient;
-import com.api.v1.patient.services.PatientsRetrieverService;
+import com.api.v1.patient.services.PatientsRetrievingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ import reactor.core.publisher.Flux;
 @RequiredArgsConstructor
 public class PatientsRetrieverController {
 
-    private final PatientsRetrieverService service;
+    private final PatientsRetrievingService service;
 
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)

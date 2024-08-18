@@ -2,7 +2,7 @@ package com.api.v1.patient.controllers;
 
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.dtos.UpdatePatientRequestDto;
-import com.api.v1.patient.services.PatientUpdaterService;
+import com.api.v1.patient.services.PatientUpdatingService;
 import com.api.v1.user.annotations.SSN;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class PatientUpdaterController {
 
-    private final PatientUpdaterService service;
+    private final PatientUpdatingService service;
 
     @PutMapping("{ssn}/updating")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)

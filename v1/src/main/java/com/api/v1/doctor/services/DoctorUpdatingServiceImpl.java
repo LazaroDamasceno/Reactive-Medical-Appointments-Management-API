@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-class DoctorUpdaterServiceImpl implements DoctorUpdaterService {
+class DoctorUpdatingServiceImpl implements DoctorUpdatingService {
 
     private final DoctorFinderUtil doctorFinderUtil;
     private final DoctorRepository doctorRepository;

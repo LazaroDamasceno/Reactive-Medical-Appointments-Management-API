@@ -2,7 +2,7 @@ package com.api.v1.doctor.controllers;
 
 import com.api.v1.doctor.annotations.DLN;
 import com.api.v1.doctor.domain.Doctor;
-import com.api.v1.doctor.services.DoctorUpdaterService;
+import com.api.v1.doctor.services.DoctorUpdatingService;
 import com.api.v1.user.dtos.UpdateUserRequestDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +13,9 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("api/v1/doctors")
 @RequiredArgsConstructor
-public class DoctorUpdaterController {
+public class DoctorUpdatingController {
 
-    private final DoctorUpdaterService service;
+    private final DoctorUpdatingService service;
 
     @PutMapping("{doctorLicenseNumber}/updating")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)

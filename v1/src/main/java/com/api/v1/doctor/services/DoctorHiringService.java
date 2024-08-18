@@ -4,7 +4,7 @@ import com.api.v1.doctor.dtos.DoctorResponseDto;
 import com.api.v1.doctor.dtos.NewDoctorRequestDto;
 import reactor.core.publisher.Mono;
 
-public interface DoctorHirerService {
+public interface DoctorHiringService {
 
     Mono<DoctorResponseDto> hire(NewDoctorRequestDto dto);
 

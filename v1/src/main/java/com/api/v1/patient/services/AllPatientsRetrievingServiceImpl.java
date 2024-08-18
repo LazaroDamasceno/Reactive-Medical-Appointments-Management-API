@@ -9,7 +9,7 @@ import reactor.core.publisher.Flux;
 
 @Service
 @RequiredArgsConstructor
-class AllPatientsRetrieverServiceImpl implements AllPatientsRetrieverService {
+class AllPatientsRetrievingServiceImpl implements AllPatientsRetrievingService {
 
     private final PatientRepository patientRepository;
 

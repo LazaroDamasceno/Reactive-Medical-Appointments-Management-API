@@ -2,7 +2,7 @@ package com.api.v1.doctor.controllers;
 
 import com.api.v1.doctor.dtos.DoctorResponseDto;
 import com.api.v1.doctor.dtos.NewDoctorRequestDto;
-import com.api.v1.doctor.services.DoctorHirerService;
+import com.api.v1.doctor.services.DoctorHiringService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,9 +12,9 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("api/v1/doctors")
 @RequiredArgsConstructor
-public class DoctorHirerController {
+public class DoctorHiringController {
 
-    private final DoctorHirerService service;
+    private final DoctorHiringService service;
 
     @PostMapping("hiring")
     @ResponseStatus(value = HttpStatus.CREATED)
