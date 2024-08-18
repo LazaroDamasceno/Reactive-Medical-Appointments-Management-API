@@ -1,4 +1,4 @@
-package com.api.v1.doctor;
+package com.api.v1.doctor.annotations;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
