@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 public record NewUserRequestDto(
         @NotBlank String firstName,
-        @NotBlank String middleName,
+        String middleName,
         @NotBlank String lastName,
         @NotNull LocalDate birthDate,
         @SSN String ssn,
