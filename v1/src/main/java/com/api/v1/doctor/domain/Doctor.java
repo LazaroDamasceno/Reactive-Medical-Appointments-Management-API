@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Getter
@@ -37,6 +38,10 @@ public class Doctor {
         this.licenseNumber = licenseNumber;
         this.user = user;
         this.hiringDate = hiringDate;
+    }
+
+    public void terminateDoctor() {
+        terminationDate = ZonedDateTime.now().toString();
     }
 
 }
