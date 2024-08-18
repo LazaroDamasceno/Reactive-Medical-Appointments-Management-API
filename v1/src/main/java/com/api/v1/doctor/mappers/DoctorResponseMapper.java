@@ -1,4 +1,4 @@
-package com.api.v1.doctor;
+package com.api.v1.doctor.mappers;
 
 import com.api.v1.doctor.domain.Doctor;
 import com.api.v1.doctor.dtos.DoctorResponseDto;

@@ -1,6 +1,6 @@
 package com.api.v1.doctor.services;
 
-import com.api.v1.doctor.DoctorResponseMapper;
+import com.api.v1.doctor.mappers.DoctorResponseMapper;
 import com.api.v1.doctor.builders.DoctorBuilder;
 import com.api.v1.doctor.domain.Doctor;
 import com.api.v1.doctor.domain.DoctorRepository;
