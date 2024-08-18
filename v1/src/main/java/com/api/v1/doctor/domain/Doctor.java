@@ -40,6 +40,10 @@ public class Doctor {
         this.hiringDate = hiringDate;
     }
 
+    public void update(User user) {
+        this.user = user;
+    }
+
     public void terminateDoctor() {
         terminationDate = ZonedDateTime.now().toString();
     }
