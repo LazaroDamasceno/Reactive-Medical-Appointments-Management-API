@@ -12,4 +12,4 @@ import java.lang.annotation.Target;
 @Target(ElementType.PARAMETER)
 @NotNull
 @Size(min = 7, max = 7)
-public @interface DoctorLicenseNumber {}
+public @interface DLN {}
