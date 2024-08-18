@@ -7,6 +7,4 @@ import java.util.UUID;
 
 public interface DoctorRepository extends ReactiveCrudRepository<Doctor, UUID> {
 
-    Mono<Doctor> findByLicenseNumber(String licenseNumber);
-
 }

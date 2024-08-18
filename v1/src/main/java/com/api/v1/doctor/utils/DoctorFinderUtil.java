@@ -16,7 +16,11 @@ public class DoctorFinderUtil {
 
     public Mono<Doctor> find(@DLN String doctorLicenseNumber) {
         return doctorRepository
-                .findByLicenseNumber(doctorLicenseNumber)
+                .findAll()
+                .filter(e -> e.getLicenseNumber().equals(doctorLicenseNumber)
+                    && e.getTerminationDate() == null
+                )
+                .singleOrEmpty()
                 .switchIfEmpty(Mono.error(DoctorNotFoundException::new));
     }
 
