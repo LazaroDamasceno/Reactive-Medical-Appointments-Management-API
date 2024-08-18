@@ -4,15 +4,15 @@ import com.api.v1.user.annotations.SSN;
 import com.api.v1.user.domain.User;
 import com.api.v1.user.domain.UserRepository;
 import com.api.v1.user.exceptions.UserNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 @Component
+@RequiredArgsConstructor
 public class UserFinderUtil {
 
-    @Autowired
-    private UserRepository repository;
+    private final UserRepository repository;
 
     public Mono<User> find(@SSN String ssn) {
         return repository
