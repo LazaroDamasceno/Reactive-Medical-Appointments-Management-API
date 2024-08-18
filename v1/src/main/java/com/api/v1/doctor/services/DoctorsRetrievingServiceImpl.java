@@ -21,4 +21,20 @@ class DoctorsRetrievingServiceImpl implements DoctorsRetrievingService {
                 .flatMap(doctor -> Flux.just(DoctorResponseMapper.map(doctor)));
     }
 
+    @Override
+    public Flux<DoctorResponseDto> findActive() {
+        return doctorRepository
+                .findAll()
+                .filter(e -> e.getTerminationDate() == null)
+                .flatMap(doctor -> Flux.just(DoctorResponseMapper.map(doctor)));
+    }
+
+    @Override
+    public Flux<DoctorResponseDto> findTerminate() {
+        return doctorRepository
+                .findAll()
+                .filter(e -> e.getTerminationDate() != null)
+                .flatMap(doctor -> Flux.just(DoctorResponseMapper.map(doctor)));
+    }
+
 }

@@ -6,5 +6,7 @@ import reactor.core.publisher.Flux;
 public interface DoctorsRetrievingService {
 
     Flux<DoctorResponseDto> findAll();
+    Flux<DoctorResponseDto> findActive();
+    Flux<DoctorResponseDto> findTerminate();
 
 }

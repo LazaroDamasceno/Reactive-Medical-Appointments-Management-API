@@ -4,6 +4,8 @@ import com.api.v1.user.dtos.UserResponseDto;
 
 public record DoctorResponseDto(
         String doctorLicenseNumber,
-        UserResponseDto userDto
+        UserResponseDto userDto,
+        String hiringDate,
+        String terminationDate
 ) {
 }
