@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("api/v1/patients")
 @RequiredArgsConstructor
-public class PatientUpdaterController {
+public class PatientUpdatingController {
 
     private final PatientUpdatingService service;
 

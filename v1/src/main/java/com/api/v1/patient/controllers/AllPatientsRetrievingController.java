@@ -13,7 +13,7 @@ import reactor.core.publisher.Flux;
 @RestController
 @RequestMapping("api/v1/patients")
 @RequiredArgsConstructor
-public class AllPatientsRetrieverController {
+public class AllPatientsRetrievingController {
 
     private final AllPatientsRetrievingService service;
 
