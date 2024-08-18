@@ -2,7 +2,7 @@ package com.api.v1.patient.controllers;
 
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.services.PatientsRetrieverService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +12,10 @@ import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("api/v1/patients")
+@RequiredArgsConstructor
 public class PatientsRetrieverController {
 
-    @Autowired
-    private PatientsRetrieverService service;
+    private final PatientsRetrieverService service;
 
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)

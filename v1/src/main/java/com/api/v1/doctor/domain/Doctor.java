@@ -1,12 +1,14 @@
 package com.api.v1.doctor.domain;
 
 import com.api.v1.user.domain.User;
+import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.UUID;
 
+@Getter
 @Document(collection = "v1_doctors")
 public class Doctor {
 
@@ -23,18 +25,6 @@ public class Doctor {
         this.id = id;
         this.licenseNumber = licenseNumber;
         this.user = user;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getLicenseNumber() {
-        return licenseNumber;
-    }
-
-    public User getUser() {
-        return user;
     }
 
 }

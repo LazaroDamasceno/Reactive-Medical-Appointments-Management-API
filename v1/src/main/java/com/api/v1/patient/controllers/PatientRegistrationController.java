@@ -4,17 +4,17 @@ import com.api.v1.patient.dtos.NewPatientRequestDto;
 import com.api.v1.patient.dtos.PatientResponseDto;
 import com.api.v1.patient.services.PatientRegistrationService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("api/v1/patients")
+@RequiredArgsConstructor
 public class PatientRegistrationController {
 
-    @Autowired
-    private PatientRegistrationService service;
+    private final PatientRegistrationService service;
 
     @PostMapping("registration")
     @ResponseStatus(value = HttpStatus.CREATED)

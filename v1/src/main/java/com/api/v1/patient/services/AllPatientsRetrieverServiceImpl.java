@@ -3,15 +3,15 @@ package com.api.v1.patient.services;
 import com.api.v1.patient.domain.PatientRepository;
 import com.api.v1.patient.dtos.PatientResponseDto;
 import com.api.v1.patient.mapper.PatientResponseMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
 @Service
+@RequiredArgsConstructor
 class AllPatientsRetrieverServiceImpl implements AllPatientsRetrieverService {
 
-    @Autowired
-    private PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
 
     @Override
     public Flux<PatientResponseDto> findAll() {

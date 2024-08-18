@@ -8,15 +8,15 @@ import com.api.v1.user.dtos.UserResponseDto;
 import com.api.v1.user.exceptions.DuplicatedSsnException;
 import com.api.v1.user.mappers.UserResponseMapper;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+@RequiredArgsConstructor
 @Service
 class UserRegistrationServiceImpl implements UserRegistrationService {
 
-    @Autowired
-    private UserRepository repository;
+    private final UserRepository repository;
 
     @Override
     public Mono<UserResponseDto> register(@Valid NewUserRequestDto dto) {
