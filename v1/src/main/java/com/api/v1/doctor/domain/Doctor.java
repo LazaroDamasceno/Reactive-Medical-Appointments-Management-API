@@ -21,10 +21,22 @@ public class Doctor {
     @Field
     private User user;
 
-    public Doctor(UUID id, String licenseNumber, User user) {
+    @Field
+    private String hiringDate;
+
+    @Field
+    private String terminationDate;
+
+    public Doctor(
+            UUID id,
+            String licenseNumber,
+            User user,
+            String hiringDate
+    ) {
         this.id = id;
         this.licenseNumber = licenseNumber;
         this.user = user;
+        this.hiringDate = hiringDate;
     }
 
 }

@@ -3,6 +3,7 @@ package com.api.v1.doctor.builders;
 import com.api.v1.doctor.domain.Doctor;
 import com.api.v1.user.domain.User;
 
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class DoctorBuilder {
@@ -10,6 +11,7 @@ public class DoctorBuilder {
     private final UUID id = UUID.randomUUID();
     private String licenseNumber;
     private User user;
+    private String hiringDate = ZonedDateTime.now().toString();
 
     protected DoctorBuilder() {}
 
@@ -28,7 +30,7 @@ public class DoctorBuilder {
     }
 
     public Doctor build() {
-        return new Doctor(id, licenseNumber, user);
+        return new Doctor(id, licenseNumber, user, hiringDate);
     }
 
 }
