@@ -4,7 +4,7 @@ import com.api.v1.doctor.domain.Doctor;
 import com.api.v1.doctor.utils.DoctorFinderUtil;
 import com.api.v1.medicalappointment.domain.MedicalAppointment;
 import com.api.v1.medicalappointment.domain.MedicalAppointmentRepository;
-import com.api.v1.medicalappointment.dtos.ActiveAppointmentDataRequestDto;
+import com.api.v1.medicalappointment.dtos.MedicalAppointmentDataRequestDto;
 import com.api.v1.medicalappointment.utils.MedicalAppointmentFinderUtil;
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.utils.PatientFinderUtil;
@@ -23,7 +23,7 @@ class MedicalAppointmentCancellingServiceImpl implements MedicalAppointmentCance
     private final MedicalAppointmentRepository repository;
 
     @Override
-    public Mono<MedicalAppointment> cancel(@Valid ActiveAppointmentDataRequestDto dto) {
+    public Mono<MedicalAppointment> cancel(@Valid MedicalAppointmentDataRequestDto dto) {
         Mono<Patient> patientMono = patientFinderUtil.find(dto.ssn());
         Mono<Doctor> doctorMono = doctorFinderUtil.find(dto.doctorLicenseNumber());
         return doctorMono

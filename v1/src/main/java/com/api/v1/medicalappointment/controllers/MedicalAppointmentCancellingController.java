@@ -2,8 +2,7 @@ package com.api.v1.medicalappointment.controllers;
 
 import com.api.v1.medicalappointment.domain.MedicalAppointment;
 import com.api.v1.medicalappointment.dtos.MedicalAppointmentDataRequestDto;
-import com.api.v1.medicalappointment.dtos.MedicalNoteRequestDto;
-import com.api.v1.medicalappointment.services.MedicalAppointmentFinishingService;
+import com.api.v1.medicalappointment.services.MedicalAppointmentCancellingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,17 +12,14 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("api/v1/medical-appointments")
 @RequiredArgsConstructor
-public class MedicalAppointmentFinishingController {
+public class MedicalAppointmentCancellingController {
 
-    private final MedicalAppointmentFinishingService service;
+    private final MedicalAppointmentCancellingService service;
 
-    @PatchMapping("archiving")
+    @PatchMapping("cancellation")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    Mono<MedicalAppointment> finish(
-            @Valid @RequestBody MedicalAppointmentDataRequestDto dataRequestDto,
-            @Valid @RequestBody MedicalNoteRequestDto medicalNote
-    ) {
-        return service.finish(dataRequestDto, medicalNote);
+    Mono<MedicalAppointment> cancel(@Valid @RequestBody MedicalAppointmentDataRequestDto dto) {
+        return service.cancel(dto);
     }
 
 }

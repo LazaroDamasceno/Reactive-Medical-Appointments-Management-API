@@ -4,7 +4,7 @@ import com.api.v1.doctor.domain.Doctor;
 import com.api.v1.doctor.utils.DoctorFinderUtil;
 import com.api.v1.medicalappointment.domain.MedicalAppointment;
 import com.api.v1.medicalappointment.domain.MedicalAppointmentRepository;
-import com.api.v1.medicalappointment.dtos.ActiveAppointmentDataRequestDto;
+import com.api.v1.medicalappointment.dtos.MedicalAppointmentDataRequestDto;
 import com.api.v1.medicalappointment.dtos.MedicalNoteRequestDto;
 import com.api.v1.medicalappointment.utils.MedicalAppointmentFinderUtil;
 import com.api.v1.patient.domain.Patient;
@@ -25,7 +25,7 @@ class MedicalAppointmentFinishingServiceImpl implements MedicalAppointmentFinish
 
     @Override
     public Mono<MedicalAppointment> finish(
-            @Valid ActiveAppointmentDataRequestDto dataDto,
+            @Valid MedicalAppointmentDataRequestDto dataDto,
             @Valid MedicalNoteRequestDto medicalNote
     ) {
         Mono<Doctor> doctorMono = doctorFinderUtil.find(dataDto.doctorLicenseNumber());
