@@ -1,4 +1,4 @@
-package com.api.v1.medicalappointment;
+package com.api.v1.medicalappointment.controllers;
 
 import com.api.v1.medicalappointment.dtos.MedicalAppointmentResponseDto;
 import com.api.v1.medicalappointment.dtos.NewMedicalAppointmentRequestDto;

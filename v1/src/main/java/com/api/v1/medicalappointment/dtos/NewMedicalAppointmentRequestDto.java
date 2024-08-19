@@ -1,8 +1,6 @@
 package com.api.v1.medicalappointment.dtos;
 
 import com.api.v1.doctor.annotations.DLN;
-import com.api.v1.doctor.domain.Doctor;
-import com.api.v1.patient.domain.Patient;
 import com.api.v1.user.annotations.SSN;
 import jakarta.validation.constraints.NotNull;
 
