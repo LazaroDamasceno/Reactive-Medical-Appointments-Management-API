@@ -7,6 +7,7 @@ import com.api.v1.medicalappointment.domain.MedicalAppointment;
 import com.api.v1.medicalappointment.domain.MedicalAppointmentRepository;
 import com.api.v1.medicalappointment.dtos.MedicalAppointmentResponseDto;
 import com.api.v1.medicalappointment.dtos.NewMedicalAppointmentRequestDto;
+import com.api.v1.medicalappointment.exceptions.ConflictingDateException;
 import com.api.v1.medicalappointment.mapper.MedicalAppointmentResponseMapper;
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.utils.PatientFinderUtil;
@@ -14,6 +15,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
+
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +30,38 @@ class MedicalAppointmentBookingServiceImpl implements MedicalAppointmentBookingS
     public Mono<MedicalAppointmentResponseDto> book(@Valid NewMedicalAppointmentRequestDto dto) {
         Mono<Doctor> doctorMono = doctorFinderUtil.find(dto.doctorLicenseNumber());
         Mono<Patient> patientMono = patientFinderUtil.find(dto.ssn());
+        return Mono.defer(() -> {
+            if (getToday().isEqual(getBookedDate(dto)) || getBookedDate(dto).isBefore(getToday())) {
+                return handleDuplicatedBookingDate();
+            } else return handleBookingAnAppointment(doctorMono, patientMono, dto);
+        });
+    }
+
+    private LocalDate getToday() {
+        return LocalDate.of(
+                LocalDate.now().getYear(),
+                LocalDate.now().getMonthValue(),
+                LocalDate.now().getDayOfMonth()
+        );
+    }
+
+    private LocalDate getBookedDate(NewMedicalAppointmentRequestDto dto) {
+        return LocalDate.of(
+                dto.bookingDate().getYear(),
+                dto.bookingDate().getMonthValue(),
+                dto.bookingDate().getDayOfMonth()
+        );
+    }
+
+    private Mono<MedicalAppointmentResponseDto> handleDuplicatedBookingDate() {
+            return Mono.error(ConflictingDateException::new);
+    }
+
+    private Mono<MedicalAppointmentResponseDto> handleBookingAnAppointment(
+            Mono<Doctor> doctorMono,
+            Mono<Patient> patientMono,
+            NewMedicalAppointmentRequestDto dto
+    ) {
         return doctorMono
                 .zipWith(patientMono)
                 .flatMap(tuple -> {
@@ -42,4 +77,5 @@ class MedicalAppointmentBookingServiceImpl implements MedicalAppointmentBookingS
                     return savedAppointment.flatMap(p -> Mono.just(MedicalAppointmentResponseMapper.map(p)));
                 });
     }
+
 }
