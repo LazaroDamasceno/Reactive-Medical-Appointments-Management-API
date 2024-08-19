@@ -5,6 +5,7 @@ import com.api.v1.doctor.utils.DoctorFinderUtil;
 import com.api.v1.medicalappointment.domain.MedicalAppointment;
 import com.api.v1.medicalappointment.domain.MedicalAppointmentRepository;
 import com.api.v1.medicalappointment.dtos.ActiveAppointmentDataRequestDto;
+import com.api.v1.medicalappointment.dtos.MedicalNoteRequestDto;
 import com.api.v1.medicalappointment.utils.MedicalAppointmentFinderUtil;
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.utils.PatientFinderUtil;
@@ -15,29 +16,31 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-class MedicalAppointmentCancellingServiceImpl implements MedicalAppointmentCancellingService {
+class MedicalAppointmentFinishingServiceImpl implements MedicalAppointmentFinishingService {
 
-    private final PatientFinderUtil patientFinderUtil;
-    private final DoctorFinderUtil doctorFinderUtil;
-    private final MedicalAppointmentFinderUtil appointmentFinderUtil;
     private final MedicalAppointmentRepository repository;
+    private final MedicalAppointmentFinderUtil appointmentFinderUtil;
+    private final DoctorFinderUtil doctorFinderUtil;
+    private final PatientFinderUtil patientFinderUtil;
 
     @Override
-    public Mono<MedicalAppointment> cancel(@Valid ActiveAppointmentDataRequestDto dto) {
-        Mono<Patient> patientMono = patientFinderUtil.find(dto.ssn());
-        Mono<Doctor> doctorMono = doctorFinderUtil.find(dto.doctorLicenseNumber());
+    public Mono<MedicalAppointment> finish(
+            @Valid ActiveAppointmentDataRequestDto dataDto,
+            @Valid MedicalNoteRequestDto medicalNote
+    ) {
+        Mono<Doctor> doctorMono = doctorFinderUtil.find(dataDto.doctorLicenseNumber());
+        Mono<Patient> patientMono = patientFinderUtil.find(dataDto.ssn());
         return doctorMono
                 .zipWith(patientMono)
                 .flatMap(tuple -> {
-                    Patient patient = tuple.getT2();
                     Doctor doctor = tuple.getT1();
+                    Patient patient = tuple.getT2();
                     return appointmentFinderUtil
-                            .find(doctor, patient, dto.bookedDate())
+                            .find(doctor, patient, dataDto.bookedDate())
                             .flatMap(e -> {
-                                e.cancelAppointment();
+                                e.addMedicalNote(medicalNote.note());
                                 return repository.save(e);
                             });
                 });
     }
-
 }

@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
-public record ActiveAppointmentDataDto(
+public record ActiveAppointmentDataRequestDto(
         @SSN String ssn,
         @DLN String doctorLicenseNumber,
         @NotNull LocalDateTime bookedDate
