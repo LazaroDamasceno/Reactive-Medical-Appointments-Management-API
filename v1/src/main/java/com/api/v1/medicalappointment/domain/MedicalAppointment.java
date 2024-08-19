@@ -15,7 +15,7 @@ import java.util.UUID;
 public class MedicalAppointment {
 
     @Id
-    private final UUID id;
+    private final UUID id = UUID.randomUUID();
 
     @Field
     private Doctor doctor;
@@ -36,12 +36,10 @@ public class MedicalAppointment {
     private String medicalNote;
 
     public MedicalAppointment(
-            UUID id,
             Doctor doctor,
             Patient patient,
             String bookingDate
     ) {
-        this.id = id;
         this.doctor = doctor;
         this.patient = patient;
         this.bookingDate = bookingDate;
