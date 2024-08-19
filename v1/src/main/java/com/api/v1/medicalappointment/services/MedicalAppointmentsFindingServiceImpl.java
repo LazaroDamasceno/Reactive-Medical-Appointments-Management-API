@@ -176,6 +176,7 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                 .find(doctorLicenseNumber)
                 .flatMapMany(doctor -> repository
                             .findAll()
+                            .filter(e -> e.getDoctor().equals(doctor))
                             .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
     }
 
