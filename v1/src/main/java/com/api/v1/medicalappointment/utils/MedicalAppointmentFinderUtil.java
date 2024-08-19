@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Component
 @RequiredArgsConstructor
@@ -27,11 +28,16 @@ public class MedicalAppointmentFinderUtil {
                 .findAll()
                 .filter(e -> e.getDoctor().equals(doctor)
                         && e.getPatient().equals(patient)
+                        && e.getBookingDate().equals(converter(bookingDate))
                         && e.getCancellationDate() == null
                         && e.getFinishingDate() == null
                 )
                 .singleOrEmpty()
                 .switchIfEmpty(Mono.error(MedicalAppointmentNotFoundException::new));
+    }
+
+    private String converter(LocalDateTime bookedDate) {
+        return ZonedDateTime.of(bookedDate, ZonedDateTime.now().getZone()).toString();
     }
 
 }
