@@ -33,7 +33,8 @@ class MedicalAppointmentBookingServiceImpl implements MedicalAppointmentBookingS
         return Mono.defer(() -> {
             if (getToday().isEqual(getBookedDate(dto)) || getBookedDate(dto).isBefore(getToday())) {
                 return handleDuplicatedBookingDate();
-            } else return handleBookingAnAppointment(doctorMono, patientMono, dto);
+            }
+            return handleBookingAnAppointment(doctorMono, patientMono, dto);
         });
     }
 
