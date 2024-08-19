@@ -34,7 +34,13 @@ class MedicalAppointmentCancellingServiceImpl implements MedicalAppointmentCance
                     Doctor doctor = tuple.getT1();
                     return appointmentFinderUtil
                             .find(doctor, patient, dto.bookedDate())
-                            .filter(e -> e.getFinishingDate() != null)
+                            .flatMap(appointment -> {
+                                if (appointment.getFinishingDate()) {
+                                    return Mono.error(MedicalAppointmentAlreadyCancelledException::new);
+                                }
+                                appointment.cancelAppointment();
+                                return repository.save(appointment);
+                            });
                 });
     }
 
