@@ -117,11 +117,11 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                         .findAll()
                         .filter(e -> e.getPatient().equals(patient)
                                 && (
-                                        LocalDateTime.parse(e.getBookingDate()).isEqual(dates.firstDate())
-                                        || LocalDateTime.parse(e.getBookingDate()).isAfter(dates.firstDate())
+                                        converter(e.getBookingDate()).isEqual(dates.firstDate())
+                                        || converter(e.getBookingDate()).isAfter(dates.firstDate())
                                 ) && (
-                                        LocalDateTime.parse(e.getBookingDate()).isEqual(dates.lastDate())
-                                        || LocalDateTime.parse(e.getBookingDate()).isBefore(dates.lastDate())
+                                        converter(e.getBookingDate()).isEqual(dates.lastDate())
+                                        || converter(e.getBookingDate()).isBefore(dates.lastDate())
                                 ))
                         .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
     }
@@ -139,11 +139,12 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                 && e.getCancellationDate() == null
                                 && e.getFinishingDate() == null
                                 && (
-                                LocalDateTime.parse(e.getBookingDate()).isEqual(dates.firstDate())
-                                        || LocalDateTime.parse(e.getBookingDate()).isAfter(dates.firstDate())
-                        ) && (
-                                LocalDateTime.parse(e.getBookingDate()).isEqual(dates.lastDate())
-                                        || LocalDateTime.parse(e.getBookingDate()).isBefore(dates.lastDate())
+                                        converter(e.getBookingDate()).isEqual(dates.firstDate())
+                                        || converter(e.getBookingDate()).isAfter(dates.firstDate())
+                                    )
+                                    && (
+                                        converter(e.getBookingDate()).isEqual(dates.lastDate())
+                                        || converter(e.getBookingDate()).isBefore(dates.lastDate())
                         ))
                         .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
     }
@@ -161,11 +162,12 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                 && e.getCancellationDate() == null
                                 && e.getFinishingDate() != null
                                 && (
-                                LocalDateTime.parse(e.getBookingDate()).isEqual(dates.firstDate())
-                                        || LocalDateTime.parse(e.getBookingDate()).isAfter(dates.firstDate())
-                        ) && (
-                                LocalDateTime.parse(e.getBookingDate()).isEqual(dates.lastDate())
-                                        || LocalDateTime.parse(e.getBookingDate()).isBefore(dates.lastDate())
+                                        converter(e.getBookingDate()).isEqual(dates.firstDate())
+                                        || converter(e.getBookingDate()).isAfter(dates.firstDate())
+                                    )
+                                    && (
+                                        converter(e.getBookingDate()).isEqual(dates.lastDate())
+                                        || converter(e.getBookingDate()).isBefore(dates.lastDate())
                         ))
                         .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
     }
@@ -230,11 +232,11 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                         .findAll()
                         .filter(e -> e.getDoctor().equals(doctor)
                                 && (
-                                        LocalDateTime.parse(e.getBookingDate()).isEqual(dates.firstDate())
-                                            || LocalDateTime.parse(e.getBookingDate()).isAfter(dates.firstDate())
+                                            converter(e.getBookingDate()).isEqual(dates.firstDate())
+                                            || converter(e.getBookingDate()).isAfter(dates.firstDate())
                                         ) && (
-                                            LocalDateTime.parse(e.getBookingDate()).isEqual(dates.lastDate())
-                                            || LocalDateTime.parse(e.getBookingDate()).isBefore(dates.lastDate())
+                                            converter(e.getBookingDate()).isEqual(dates.lastDate())
+                                            || converter(e.getBookingDate()).isBefore(dates.lastDate())
                                 ))
                         .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
     }
@@ -252,11 +254,12 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                 && e.getCancellationDate() == null
                                 && e.getFinishingDate() == null
                                 && (
-                                LocalDateTime.parse(e.getBookingDate()).isEqual(dates.firstDate())
-                                        || LocalDateTime.parse(e.getBookingDate()).isAfter(dates.firstDate())
-                        ) && (
-                                LocalDateTime.parse(e.getBookingDate()).isEqual(dates.lastDate())
-                                        || LocalDateTime.parse(e.getBookingDate()).isBefore(dates.lastDate())
+                                        converter(e.getBookingDate()).isEqual(dates.firstDate())
+                                        || converter(e.getBookingDate()).isAfter(dates.firstDate())
+                                    )
+                                    && (
+                                        converter(e.getBookingDate()).isEqual(dates.lastDate())
+                                        || converter(e.getBookingDate()).isBefore(dates.lastDate())
                         ))
                         .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
     }
@@ -274,14 +277,18 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                 && e.getCancellationDate() == null
                                 && e.getFinishingDate() != null
                                 && (
-                                LocalDateTime.parse(e.getBookingDate()).isEqual(dates.firstDate())
-                                        || LocalDateTime.parse(e.getBookingDate()).isAfter(dates.firstDate())
-                        ) && (
-                                LocalDateTime.parse(e.getBookingDate()).isEqual(dates.lastDate())
-                                        || LocalDateTime.parse(e.getBookingDate()).isBefore(dates.lastDate())
+                                        converter(e.getBookingDate()).isEqual(dates.firstDate())
+                                        || converter(e.getBookingDate()).isAfter(dates.firstDate())
+                                    ) 
+                                    && (
+                                        converter(e.getBookingDate()).isEqual(dates.lastDate())
+                                        || converter(e.getBookingDate()).isBefore(dates.lastDate())
                         ))
                         .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
     }
-
+    
+    private LocalDateTime converter(String date) {
+        return LocalDateTime.parse(date);
+    }
 
 }
