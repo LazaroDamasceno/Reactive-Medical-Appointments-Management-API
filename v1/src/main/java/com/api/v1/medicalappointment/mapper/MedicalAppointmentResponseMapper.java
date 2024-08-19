@@ -1,4 +1,4 @@
-package com.api.v1.medicalappointment;
+package com.api.v1.medicalappointment.mapper;
 
 import com.api.v1.doctor.mappers.DoctorResponseMapper;
 import com.api.v1.medicalappointment.domain.MedicalAppointment;
