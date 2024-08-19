@@ -17,7 +17,7 @@ public class MedicalAppointmentFinishingController {
 
     private final MedicalAppointmentFinishingService service;
 
-    @PatchMapping("archiving")
+    @PatchMapping("finishing")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     Mono<MedicalAppointment> finish(
             @Valid @RequestBody MedicalAppointmentDataRequestDto dataRequestDto,
