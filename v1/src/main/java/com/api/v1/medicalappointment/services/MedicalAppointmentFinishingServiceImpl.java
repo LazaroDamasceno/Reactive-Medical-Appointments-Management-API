@@ -38,7 +38,7 @@ class MedicalAppointmentFinishingServiceImpl implements MedicalAppointmentFinish
                     Patient patient = tuple.getT2();
                     return appointmentFinderUtil
                             .find(doctor, patient, dataDto.bookedDate())
-                            .filter(e -> e.getCancellationDate() == null || e.getFinishingDate() != null)
+                            .filter(e -> e.getCancellationDate() != null)
                             .switchIfEmpty(Mono.error(MedicalAppointmentAlreadyFinishedException::new))
                             .flatMap(e -> {
                                 e.addMedicalNote(medicalNote.note());
