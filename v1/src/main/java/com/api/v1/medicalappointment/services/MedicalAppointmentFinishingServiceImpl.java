@@ -39,11 +39,6 @@ class MedicalAppointmentFinishingServiceImpl implements MedicalAppointmentFinish
                     return appointmentFinderUtil
                             .find(doctor, patient, dataDto.bookedDate())
                             .filter(e -> e.getCancellationDate() != null)
-                            .switchIfEmpty(Mono.error(MedicalAppointmentAlreadyFinishedException::new))
-                            .flatMap(e -> {
-                                e.addMedicalNote(medicalNote.note());
-                                return repository.save(e);
-                            });
                 });
     }
 }
