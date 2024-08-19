@@ -6,6 +6,7 @@ import com.api.v1.medicalappointment.domain.MedicalAppointment;
 import com.api.v1.medicalappointment.domain.MedicalAppointmentRepository;
 import com.api.v1.medicalappointment.dtos.MedicalAppointmentDataRequestDto;
 import com.api.v1.medicalappointment.dtos.MedicalNoteRequestDto;
+import com.api.v1.medicalappointment.exceptions.MedicalAppointmentAlreadyFinishedException;
 import com.api.v1.medicalappointment.utils.MedicalAppointmentFinderUtil;
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.utils.PatientFinderUtil;
@@ -37,6 +38,8 @@ class MedicalAppointmentFinishingServiceImpl implements MedicalAppointmentFinish
                     Patient patient = tuple.getT2();
                     return appointmentFinderUtil
                             .find(doctor, patient, dataDto.bookedDate())
+                            .filter(e -> e.getCancellationDate() == null || e.getFinishingDate() != null)
+                            .switchIfEmpty(Mono.error(MedicalAppointmentAlreadyFinishedException::new))
                             .flatMap(e -> {
                                 e.addMedicalNote(medicalNote.note());
                                 return repository.save(e);
