@@ -1,9 +1,8 @@
 package com.api.v1.patient.controllers;
 
-import com.api.v1.patient.domain.Patient;
-import com.api.v1.patient.dtos.UpdatePatientRequestDto;
+import com.api.v1.patient.dtos.NewPatientRequestDto;
+import com.api.v1.patient.dtos.PatientResponseDto;
 import com.api.v1.patient.services.PatientUpdatingService;
-import com.api.v1.user.annotations.SSN;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +18,10 @@ public class PatientUpdatingController {
         this.service = service;
     }
 
-    @PutMapping("{ssn}/updating")
-    @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public Mono<Patient> update(
-            @PathVariable @SSN String ssn,
-            @RequestBody @Valid UpdatePatientRequestDto dto
-    ) {
-        return service.update(ssn, dto);
+    @PutMapping("updating")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public Mono<PatientResponseDto> update(@RequestBody @Valid NewPatientRequestDto dto) {
+        return service.update(dto);
     }
 
 }

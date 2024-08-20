@@ -27,7 +27,7 @@ public class Doctor {
     private String terminationDate;
 
     @Field
-    private boolean isActive = true;
+    private String archivingDate;
 
     public Doctor(
             UUID id,
@@ -47,7 +47,6 @@ public class Doctor {
 
     public void terminateDoctor() {
         terminationDate = ZonedDateTime.now().toString();
-        isActive = false;
     }
 
     public UUID getId() {
@@ -70,8 +69,13 @@ public class Doctor {
         return terminationDate;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public String getArchivingDate() {
+        return archivingDate;
+    }
+
+    public Doctor archiveDoctor() {
+        archivingDate = ZonedDateTime.now().toString();
+        return this;
     }
 
 }

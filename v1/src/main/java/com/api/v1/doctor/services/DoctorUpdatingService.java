@@ -1,11 +1,11 @@
 package com.api.v1.doctor.services;
 
-import com.api.v1.doctor.domain.Doctor;
-import com.api.v1.user.dtos.UpdateUserRequestDto;
+import com.api.v1.doctor.dtos.DoctorResponseDto;
+import com.api.v1.doctor.dtos.NewDoctorRequestDto;
 import reactor.core.publisher.Mono;
 
 public interface DoctorUpdatingService {
 
-    Mono<Doctor> update(String doctorLicenseNumber, UpdateUserRequestDto dto);
+    Mono<DoctorResponseDto> update(NewDoctorRequestDto dto);
 
 }
