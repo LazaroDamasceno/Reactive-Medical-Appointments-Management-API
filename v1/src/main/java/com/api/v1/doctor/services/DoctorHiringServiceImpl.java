@@ -34,7 +34,6 @@ class DoctorHiringServiceImpl implements DoctorHiringService {
                 .findAll()
                 .filter(e -> e.getLicenseNumber().equals(dto.doctorLicenseNumber())
                         && e.getTerminationDate() == null
-                        && e.isActive()
                 )
                 .hasElements()
                 .flatMap(exists -> {

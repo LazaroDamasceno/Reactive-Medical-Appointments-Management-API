@@ -21,7 +21,6 @@ public class DoctorFinderUtil {
                 .findAll()
                 .filter(e -> e.getLicenseNumber().equals(doctorLicenseNumber)
                         && e.getTerminationDate() == null
-                        && e.isActive()
                 )
                 .singleOrEmpty()
                 .switchIfEmpty(Mono.error(DoctorNotFoundException::new));
