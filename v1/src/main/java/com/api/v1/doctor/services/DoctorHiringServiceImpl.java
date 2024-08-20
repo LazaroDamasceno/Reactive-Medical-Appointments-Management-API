@@ -11,16 +11,22 @@ import com.api.v1.user.builder.UserBuilder;
 import com.api.v1.user.domain.User;
 import com.api.v1.user.domain.UserRepository;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-@RequiredArgsConstructor
 class DoctorHiringServiceImpl implements DoctorHiringService {
 
     private final UserRepository userRepository;
     private final DoctorRepository doctorRepository;
+
+    public DoctorHiringServiceImpl(
+        UserRepository userRepository, 
+        DoctorRepository doctorRepository
+    ) {
+        this.userRepository = userRepository;
+        this.doctorRepository = doctorRepository;
+    }
 
     @Override
     public Mono<DoctorResponseDto> hire(@Valid NewDoctorRequestDto dto) {

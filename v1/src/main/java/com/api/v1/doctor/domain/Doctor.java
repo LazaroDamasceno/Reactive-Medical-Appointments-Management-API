@@ -1,7 +1,6 @@
 package com.api.v1.doctor.domain;
 
 import com.api.v1.user.domain.User;
-import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -9,7 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
-@Getter
 @Document(collection = "v1_doctors")
 public class Doctor {
 
@@ -23,7 +21,7 @@ public class Doctor {
     private User user;
 
     @Field
-    private String hiringDate;
+    private final String hiringDate;
 
     @Field
     private String terminationDate;
@@ -50,6 +48,30 @@ public class Doctor {
     public void terminateDoctor() {
         terminationDate = ZonedDateTime.now().toString();
         isActive = false;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getLicenseNumber() {
+        return licenseNumber;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getHiringDate() {
+        return hiringDate;
+    }
+
+    public String getTerminationDate() {
+        return terminationDate;
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 
 }

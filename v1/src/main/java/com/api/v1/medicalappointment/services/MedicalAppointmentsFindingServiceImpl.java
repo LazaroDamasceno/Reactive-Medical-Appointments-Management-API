@@ -9,21 +9,29 @@ import com.api.v1.medicalappointment.mapper.MedicalAppointmentResponseMapper;
 import com.api.v1.patient.utils.PatientFinderUtil;
 import com.api.v1.user.annotations.SSN;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
 import java.time.LocalDateTime;
 
 @Service
-@RequiredArgsConstructor
 class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindingService {
 
     private final MedicalAppointmentRepository repository;
     private final PatientFinderUtil patientFinderUtil;
     private final DoctorFinderUtil doctorFinderUtil;
 
-    @Override
+    public MedicalAppointmentsFindingServiceImpl(
+        MedicalAppointmentRepository repository,
+        PatientFinderUtil patientFinderUtil,
+        DoctorFinderUtil doctorFinderUtil
+     ) {
+        this.repository = repository;
+        this.patientFinderUtil = patientFinderUtil;
+        this.doctorFinderUtil = doctorFinderUtil;
+}
+
+@Override
     public Flux<MedicalAppointmentResponseDto> findAll() {
         return repository
                 .findAll()

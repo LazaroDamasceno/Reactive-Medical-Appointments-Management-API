@@ -12,19 +12,27 @@ import com.api.v1.medicalappointment.mapper.MedicalAppointmentResponseMapper;
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.utils.PatientFinderUtil;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
 @Service
-@RequiredArgsConstructor
 class MedicalAppointmentBookingServiceImpl implements MedicalAppointmentBookingService {
 
     private final MedicalAppointmentRepository medicalAppointmentRepository;
     private final DoctorFinderUtil doctorFinderUtil;
     private final PatientFinderUtil patientFinderUtil;
+
+    public MedicalAppointmentBookingServiceImpl(
+        MedicalAppointmentRepository medicalAppointmentRepository,
+        DoctorFinderUtil doctorFinderUtil, 
+        PatientFinderUtil patientFinderUtil
+    ) {
+        this.medicalAppointmentRepository = medicalAppointmentRepository;
+        this.doctorFinderUtil = doctorFinderUtil;
+        this.patientFinderUtil = patientFinderUtil;
+    }
 
     @Override
     public Mono<MedicalAppointmentResponseDto> book(@Valid NewMedicalAppointmentRequestDto dto) {

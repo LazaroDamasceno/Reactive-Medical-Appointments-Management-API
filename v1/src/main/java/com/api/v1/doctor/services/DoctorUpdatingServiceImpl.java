@@ -8,17 +8,25 @@ import com.api.v1.user.domain.User;
 import com.api.v1.user.domain.UserRepository;
 import com.api.v1.user.dtos.UpdateUserRequestDto;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-@RequiredArgsConstructor
 class DoctorUpdatingServiceImpl implements DoctorUpdatingService {
 
     private final DoctorFinderUtil doctorFinderUtil;
     private final DoctorRepository doctorRepository;
     private final UserRepository userRepository;
+
+    public DoctorUpdatingServiceImpl(
+        DoctorFinderUtil doctorFinderUtil, 
+        DoctorRepository doctorRepository,
+        UserRepository userRepository
+    ) {
+        this.doctorFinderUtil = doctorFinderUtil;
+        this.doctorRepository = doctorRepository;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public Mono<Doctor> update(@DLN String doctorLicenseNumber, @Valid UpdateUserRequestDto dto) {

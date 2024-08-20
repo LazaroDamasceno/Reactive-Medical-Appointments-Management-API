@@ -3,7 +3,6 @@ package com.api.v1.doctor.controllers;
 import com.api.v1.doctor.annotations.DLN;
 import com.api.v1.doctor.domain.Doctor;
 import com.api.v1.doctor.services.DoctorTerminatingService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +12,13 @@ import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("api/v1/doctors")
-@RequiredArgsConstructor
 public class DoctorTerminatingController {
 
     private final DoctorTerminatingService service;
+
+    public DoctorTerminatingController(DoctorTerminatingService service) {
+        this.service = service;
+    }
 
     @PatchMapping("{doctorLicenseNumber}/termination")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)

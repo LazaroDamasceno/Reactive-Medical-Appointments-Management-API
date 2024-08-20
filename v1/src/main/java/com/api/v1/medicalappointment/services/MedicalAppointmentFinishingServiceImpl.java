@@ -11,18 +11,28 @@ import com.api.v1.medicalappointment.utils.MedicalAppointmentFinderUtil;
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.utils.PatientFinderUtil;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-@RequiredArgsConstructor
 class MedicalAppointmentFinishingServiceImpl implements MedicalAppointmentFinishingService {
 
     private final MedicalAppointmentRepository repository;
     private final MedicalAppointmentFinderUtil appointmentFinderUtil;
     private final DoctorFinderUtil doctorFinderUtil;
     private final PatientFinderUtil patientFinderUtil;
+
+    public MedicalAppointmentFinishingServiceImpl(
+        MedicalAppointmentRepository repository,
+        MedicalAppointmentFinderUtil appointmentFinderUtil, 
+        DoctorFinderUtil doctorFinderUtil,
+        PatientFinderUtil patientFinderUtil
+    ) {
+        this.repository = repository;
+        this.appointmentFinderUtil = appointmentFinderUtil;
+        this.doctorFinderUtil = doctorFinderUtil;
+        this.patientFinderUtil = patientFinderUtil;
+    }
 
     @Override
     public Mono<MedicalAppointment> finish(

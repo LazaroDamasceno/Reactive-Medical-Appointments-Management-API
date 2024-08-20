@@ -8,15 +8,17 @@ import com.api.v1.user.dtos.UserResponseDto;
 import com.api.v1.user.exceptions.DuplicatedSsnException;
 import com.api.v1.user.mappers.UserResponseMapper;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-@RequiredArgsConstructor
 @Service
 class UserRegistrationServiceImpl implements UserRegistrationService {
 
     private final UserRepository repository;
+
+    public UserRegistrationServiceImpl(UserRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public Mono<UserResponseDto> register(@Valid NewUserRequestDto dto) {

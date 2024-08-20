@@ -8,17 +8,25 @@ import com.api.v1.user.annotations.SSN;
 import com.api.v1.user.domain.User;
 import com.api.v1.user.domain.UserRepository;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-@RequiredArgsConstructor
 class PatientUpdatingServiceImpl implements PatientUpdatingService {
 
     private final UserRepository userRepository;
     private final PatientFinderUtil patientFinderUtil;
     private final PatientRepository patientRepository;
+
+    public PatientUpdatingServiceImpl(
+        UserRepository userRepository, 
+        PatientFinderUtil patientFinderUtil,
+        PatientRepository patientRepository
+    ) {
+        this.userRepository = userRepository;
+        this.patientFinderUtil = patientFinderUtil;
+        this.patientRepository = patientRepository;
+    }
 
     @Override
     public Mono<Patient> update(@SSN String ssn, @Valid UpdatePatientRequestDto dto) {

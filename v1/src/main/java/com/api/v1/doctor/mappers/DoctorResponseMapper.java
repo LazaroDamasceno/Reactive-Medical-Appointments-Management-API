@@ -3,7 +3,6 @@ package com.api.v1.doctor.mappers;
 import com.api.v1.doctor.domain.Doctor;
 import com.api.v1.doctor.dtos.DoctorResponseDto;
 import com.api.v1.user.mappers.UserResponseMapper;
-import jakarta.validation.constraints.NotBlank;
 
 public class DoctorResponseMapper {
 

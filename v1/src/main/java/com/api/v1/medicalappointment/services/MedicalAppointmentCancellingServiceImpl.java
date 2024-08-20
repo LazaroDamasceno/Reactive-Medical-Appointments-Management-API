@@ -10,18 +10,28 @@ import com.api.v1.medicalappointment.utils.MedicalAppointmentFinderUtil;
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.utils.PatientFinderUtil;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-@RequiredArgsConstructor
 class MedicalAppointmentCancellingServiceImpl implements MedicalAppointmentCancellingService {
 
     private final PatientFinderUtil patientFinderUtil;
     private final DoctorFinderUtil doctorFinderUtil;
     private final MedicalAppointmentFinderUtil appointmentFinderUtil;
     private final MedicalAppointmentRepository repository;
+
+    public MedicalAppointmentCancellingServiceImpl(
+        PatientFinderUtil patientFinderUtil,
+        DoctorFinderUtil doctorFinderUtil, 
+        MedicalAppointmentFinderUtil appointmentFinderUtil,
+        MedicalAppointmentRepository repository
+    ) {
+        this.patientFinderUtil = patientFinderUtil;
+        this.doctorFinderUtil = doctorFinderUtil;
+        this.appointmentFinderUtil = appointmentFinderUtil;
+        this.repository = repository;
+    }
 
     @Override
     public Mono<MedicalAppointment> cancel(@Valid MedicalAppointmentDataRequestDto dto) {

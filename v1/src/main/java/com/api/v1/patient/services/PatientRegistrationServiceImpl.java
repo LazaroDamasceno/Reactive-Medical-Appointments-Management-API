@@ -11,18 +11,25 @@ import com.api.v1.user.domain.User;
 import com.api.v1.user.domain.UserRepository;
 import com.api.v1.user.exceptions.DuplicatedSsnException;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-@RequiredArgsConstructor
 class PatientRegistrationServiceImpl implements PatientRegistrationService {
 
     private final PatientRepository patientRepository;
     private final UserRepository userRepository;
     private final PatientBuilder patientBuilder;
+
+    public PatientRegistrationServiceImpl(
+        PatientRepository patientRepository, 
+        UserRepository userRepository,
+            PatientBuilder patientBuilder
+    ) {
+        this.patientRepository = patientRepository;
+        this.userRepository = userRepository;
+        this.patientBuilder = patientBuilder;
+    }
 
     @Override
     public Mono<PatientResponseDto> register(@Valid NewPatientRequestDto dto) {

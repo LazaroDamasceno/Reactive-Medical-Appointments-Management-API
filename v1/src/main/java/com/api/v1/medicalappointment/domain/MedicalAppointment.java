@@ -2,7 +2,6 @@ package com.api.v1.medicalappointment.domain;
 
 import com.api.v1.doctor.domain.Doctor;
 import com.api.v1.patient.domain.Patient;
-import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -11,17 +10,16 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Document(collection = "v1_medical_appointments")
-@Getter
 public class MedicalAppointment {
 
     @Id
     private final UUID id = UUID.randomUUID();
 
     @Field
-    private Doctor doctor;
+    private final Doctor doctor;
 
     @Field
-    private Patient patient;
+    private final Patient patient;
 
     @Field
     private final String bookingDate;
@@ -52,6 +50,34 @@ public class MedicalAppointment {
     public void addMedicalNote(String medicalNote) {
         this.medicalNote = medicalNote;
         finishingDate = ZonedDateTime.now().toString();
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public String getBookingDate() {
+        return bookingDate;
+    }
+
+    public String getCancellationDate() {
+        return cancellationDate;
+    }
+
+    public String getFinishingDate() {
+        return finishingDate;
+    }
+
+    public String getMedicalNote() {
+        return medicalNote;
     }
 
 }

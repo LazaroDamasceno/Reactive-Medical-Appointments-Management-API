@@ -2,7 +2,6 @@ package com.api.v1.user.domain;
 
 import com.api.v1.user.dtos.UpdateUserRequestDto;
 import jakarta.validation.Valid;
-import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -10,7 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Getter
 @Document(collection = "v1_users")
 public class User {
 
@@ -79,6 +77,42 @@ public class User {
             return "%s %s".formatted(firstName, lastName);
         }
         return "%s %s %s".formatted(firstName, middleName, lastName);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public String getSsn() {
+        return ssn;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getGender() {
+        return gender;
     }
 
 }
