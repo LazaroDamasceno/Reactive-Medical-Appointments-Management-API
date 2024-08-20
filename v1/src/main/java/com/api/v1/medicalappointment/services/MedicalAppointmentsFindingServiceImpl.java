@@ -35,7 +35,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
     public Flux<MedicalAppointmentResponseDto> findAll() {
         return repository
                 .findAll()
-                .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e)));
+                .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e)))
+                .cache();
     }
 
     @Override
@@ -45,7 +46,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                 .filter(e -> e.getFinishingDate() == null
                         && e.getCancellationDate() == null
                 )
-                .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e)));
+                .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e)))
+                .cache();
     }
 
     @Override
@@ -55,7 +57,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                 .filter(e -> e.getFinishingDate() != null
                         && e.getCancellationDate() == null
                 )
-                .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e)));
+                .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e)))
+                .cache();
     }
 
     @Override
@@ -65,7 +68,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                 .filter(e -> e.getFinishingDate() == null
                         && e.getCancellationDate() != null
                 )
-                .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e)));
+                .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e)))
+                .cache();
     }
 
     @Override
@@ -75,7 +79,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                 .flatMapMany(patient -> repository
                         .findAll()
                         .filter(e -> e.getPatient().equals(patient))
-                        .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e))));
+                        .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e))))
+                        .cache();
     }
 
     @Override
@@ -88,7 +93,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                 && e.getCancellationDate() == null
                                 && e.getFinishingDate() == null
                         )
-                        .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e))));
+                        .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e))))
+                        .cache();
     }
 
     @Override
@@ -101,7 +107,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                 && e.getCancellationDate() == null
                                 && e.getFinishingDate() != null
                         )
-                        .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e))));
+                        .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e))))
+                        .cache();
     }
 
     @Override
@@ -114,7 +121,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                 && e.getCancellationDate() != null
                                 && e.getFinishingDate() == null
                         )
-                        .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e))));
+                        .flatMap(e -> Flux.just(MedicalAppointmentResponseMapper.map(e))))
+                        .cache();
     }
 
     @Override
@@ -131,7 +139,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                         converter(e.getBookingDate()).isEqual(dates.lastDate())
                                         || converter(e.getBookingDate()).isBefore(dates.lastDate())
                                 ))
-                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
+                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))))
+                        .cache();
     }
 
     @Override
@@ -154,7 +163,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                         converter(e.getBookingDate()).isEqual(dates.lastDate())
                                         || converter(e.getBookingDate()).isBefore(dates.lastDate())
                         ))
-                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
+                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))))
+                        .cache();
     }
 
     @Override
@@ -177,7 +187,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                         converter(e.getBookingDate()).isEqual(dates.lastDate())
                                         || converter(e.getBookingDate()).isBefore(dates.lastDate())
                         ))
-                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
+                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))))
+                        .cache();
     }
 
     @Override
@@ -187,7 +198,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                 .flatMapMany(doctor -> repository
                             .findAll()
                             .filter(e -> e.getDoctor().equals(doctor))
-                            .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
+                            .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))))
+                            .cache();
     }
 
     @Override
@@ -200,7 +212,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                 && e.getCancellationDate() == null
                                 && e.getFinishingDate() == null
                         )
-                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
+                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))))
+                        .cache();
     }
 
     @Override
@@ -213,7 +226,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                 && e.getCancellationDate() == null
                                 && e.getFinishingDate() != null
                         )
-                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
+                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))))
+                        .cache();
     }
 
     @Override
@@ -226,7 +240,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                 && e.getCancellationDate() != null
                                 && e.getFinishingDate() == null
                         )
-                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
+                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))))
+                        .cache();
     }
 
     @Override
@@ -246,7 +261,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                             converter(e.getBookingDate()).isEqual(dates.lastDate())
                                             || converter(e.getBookingDate()).isBefore(dates.lastDate())
                                 ))
-                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
+                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))))
+                        .cache();
     }
 
     @Override
@@ -269,7 +285,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                         converter(e.getBookingDate()).isEqual(dates.lastDate())
                                         || converter(e.getBookingDate()).isBefore(dates.lastDate())
                         ))
-                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
+                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))))
+                        .cache();
     }
 
     @Override
@@ -292,7 +309,8 @@ class MedicalAppointmentsFindingServiceImpl implements MedicalAppointmentsFindin
                                         converter(e.getBookingDate()).isEqual(dates.lastDate())
                                         || converter(e.getBookingDate()).isBefore(dates.lastDate())
                         ))
-                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))));
+                        .flatMap(b -> Flux.just(MedicalAppointmentResponseMapper.map(b))))
+                        .cache();
     }
     
     private LocalDateTime converter(String date) {

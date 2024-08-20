@@ -19,7 +19,8 @@ class AllPatientsRetrievingServiceImpl implements AllPatientsRetrievingService {
     public Flux<PatientResponseDto> findAll() {
         return patientRepository
                 .findAll()
-                .flatMap(patient -> Flux.just(PatientResponseMapper.map(patient)));
+                .flatMap(patient -> Flux.just(PatientResponseMapper.map(patient)))
+                .cache();
     }
 
 }
