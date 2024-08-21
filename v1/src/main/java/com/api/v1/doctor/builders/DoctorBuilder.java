@@ -11,7 +11,7 @@ public class DoctorBuilder {
     private final UUID id = UUID.randomUUID();
     private String licenseNumber;
     private User user;
-    private final String hiringDate = ZonedDateTime.now().toString();
+    private String hiringDate = ZonedDateTime.now().toString();
 
     protected DoctorBuilder() {}
 

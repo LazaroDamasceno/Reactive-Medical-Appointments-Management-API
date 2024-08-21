@@ -1,15 +1,12 @@
 package com.api.v1.doctor.services;
 
-import com.api.v1.doctor.builders.DoctorBuilder;
+import com.api.v1.doctor.annotations.DLN;
 import com.api.v1.doctor.domain.Doctor;
 import com.api.v1.doctor.domain.DoctorRepository;
-import com.api.v1.doctor.dtos.DoctorResponseDto;
-import com.api.v1.doctor.dtos.NewDoctorRequestDto;
-import com.api.v1.doctor.mappers.DoctorResponseMapper;
 import com.api.v1.doctor.utils.DoctorFinderUtil;
-import com.api.v1.user.builder.UserBuilder;
 import com.api.v1.user.domain.User;
 import com.api.v1.user.domain.UserRepository;
+import com.api.v1.user.dtos.UpdateUserRequestDto;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -32,29 +29,17 @@ class DoctorUpdatingServiceImpl implements DoctorUpdatingService {
     }
 
     @Override
-    public Mono<DoctorResponseDto> update(@Valid NewDoctorRequestDto dto) {
+    public Mono<Doctor> update(@DLN String doctorLicenseNumber, @Valid UpdateUserRequestDto dto) {
         return doctorFinderUtil
-                .find(dto.doctorLicenseNumber())
+                .find(doctorLicenseNumber)
                 .flatMap(doctor -> {
-                    User oldUser = doctor.getUser().archiveUser();
-                    Mono<User> savedOldUser = userRepository.save(oldUser);
-                    Doctor oldDoctor = doctor.archiveDoctor();
-                    Mono<Doctor> savedOldDoctor = doctorRepository.save(oldDoctor);
-                    return Mono.defer(() -> {
-                        User newUser = UserBuilder.createFromDto(dto.newUserDto()).build();
-                        return userRepository
-                                .save(newUser)
-                                .flatMap(user -> {
-                                    Doctor newDoctor = DoctorBuilder
-                                            .create()
-                                            .withLicenseNumber(dto.doctorLicenseNumber())
-                                            .withUser(user)
-                                            .build();
-                                    Mono<Doctor> savedNewDoctor = doctorRepository.save(newDoctor);
-                                    return savedNewDoctor
-                                            .flatMap(d -> Mono.just(DoctorResponseMapper.map(d)));
-                                });
-                    });
+                    User updatedUser = doctor.getUser().update(dto);
+                    return userRepository
+                            .save(updatedUser)
+                            .flatMap(user -> {
+                                doctor.update(user);
+                                return doctorRepository.save(doctor);
+                            });
                 });
     }
 

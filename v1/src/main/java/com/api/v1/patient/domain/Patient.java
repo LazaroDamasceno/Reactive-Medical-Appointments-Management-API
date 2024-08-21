@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Document(collection = "v1_patients")
@@ -19,9 +18,6 @@ public class Patient {
 
     @Field
     private User user;
-
-    @Field
-    private String archivingDate;
 
     public Patient(UUID id, String address, User user) {
         this.id = id;
@@ -45,14 +41,5 @@ public class Patient {
     public User getUser() {
         return user;
     }
-
-    public String getArchivingDate() {
-        return archivingDate;
-    }
-
-    public Patient archivePatient() {
-        this.archivingDate = ZonedDateTime.now().toString();
-        return this;
-    }
-
+    
 }

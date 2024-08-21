@@ -1,9 +1,9 @@
 package com.api.v1.doctor.controllers;
 
+import com.api.v1.doctor.annotations.DLN;
 import com.api.v1.doctor.domain.Doctor;
-import com.api.v1.doctor.dtos.DoctorResponseDto;
-import com.api.v1.doctor.dtos.NewDoctorRequestDto;
 import com.api.v1.doctor.services.DoctorUpdatingService;
+import com.api.v1.user.dtos.UpdateUserRequestDto;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +19,13 @@ public class DoctorUpdatingController {
         this.service = service;
     }
 
-    @PutMapping("updating")
+    @PutMapping("{doctorLicenseNumber}/updating")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
-    public Mono<DoctorResponseDto> update(@Valid @RequestBody NewDoctorRequestDto dto
+    public Mono<Doctor> update(
+            @DLN @PathVariable String doctorLicenseNumber,
+            @Valid @RequestBody UpdateUserRequestDto dto
     ) {
-        return service.update(dto);
+        return service.update(doctorLicenseNumber, dto);
     }
 
 }

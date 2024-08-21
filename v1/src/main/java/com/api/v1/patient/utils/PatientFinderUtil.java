@@ -25,12 +25,7 @@ public class PatientFinderUtil {
         return userFinderUtil
                 .find(ssn)
                 .flatMap(patientRepository::findByUser)
-                .flatMap(patient -> {
-                    if (patient.getArchivingDate() != null) {
-                        return Mono.error(PatientNotFoundException::new);
-                    }
-                    return Mono.just(patient);
-                });
+                .switchIfEmpty(Mono.error(PatientNotFoundException::new));
     }
 
 }
