@@ -19,8 +19,7 @@ class DoctorsRetrievingServiceImpl implements DoctorsRetrievingService {
     public Flux<DoctorResponseDto> findAll() {
         return doctorRepository
                 .findAll()
-                .flatMap(doctor -> Flux.just(DoctorResponseMapper.map(doctor)))
-                .cache();
+                .flatMap(doctor -> Flux.just(DoctorResponseMapper.map(doctor)));
     }
 
     @Override
@@ -28,8 +27,7 @@ class DoctorsRetrievingServiceImpl implements DoctorsRetrievingService {
         return doctorRepository
                 .findAll()
                 .filter(e -> e.getTerminationDate() == null)
-                .flatMap(doctor -> Flux.just(DoctorResponseMapper.map(doctor)))
-                .cache();
+                .flatMap(doctor -> Flux.just(DoctorResponseMapper.map(doctor)));
     }
 
     @Override
@@ -37,8 +35,7 @@ class DoctorsRetrievingServiceImpl implements DoctorsRetrievingService {
         return doctorRepository
                 .findAll()
                 .filter(e -> e.getTerminationDate() != null)
-                .flatMap(doctor -> Flux.just(DoctorResponseMapper.map(doctor)))
-                .cache();
+                .flatMap(doctor -> Flux.just(DoctorResponseMapper.map(doctor)));
     }
 
 }
