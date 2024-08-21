@@ -4,6 +4,7 @@ import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.domain.PatientRepository;
 import com.api.v1.patient.exceptions.PatientNotFoundException;
 import com.api.v1.user.annotations.SSN;
+import com.api.v1.user.domain.UserRepository;
 import com.api.v1.user.utils.UserFinderUtil;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
@@ -12,20 +13,20 @@ import reactor.core.publisher.Mono;
 public class PatientFinderUtil {
 
     private final PatientRepository patientRepository;
-    private final UserFinderUtil userFinderUtil;
+    private final UserRepository userRepository;
 
     public PatientFinderUtil(
             PatientRepository patientRepository, 
-            UserFinderUtil userFinderUtil) {
+            UserRepository userRepository) {
         this.patientRepository = patientRepository;
-        this.userFinderUtil = userFinderUtil;
+        this.userRepository = userRepository;
     }
 
     public Mono<Patient> find(@SSN String ssn) {
-        return userFinderUtil
-                .find(ssn)
-                .flatMap(patientRepository::findByUser)
-                .switchIfEmpty(Mono.error(PatientNotFoundException::new));
+        return UserRepository
+                .findBySsn(ssn)
+                .switchIfEmpty(Mono.error(PatientNotFoundException::new))
+                .flatMap(patientRepository::findByUser);
     }
 
 }
