@@ -5,7 +5,6 @@ import com.api.v1.patient.domain.PatientRepository;
 import com.api.v1.patient.exceptions.PatientNotFoundException;
 import com.api.v1.user.annotations.SSN;
 import com.api.v1.user.domain.UserRepository;
-import com.api.v1.user.utils.UserFinderUtil;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
