@@ -30,21 +30,23 @@ class DoctorUpdatingServiceImpl implements DoctorUpdatingService {
 
     @Override
     public Mono<Doctor> update(@DLN String doctorLicenseNumber, @Valid UpdateUserRequestDto dto) {
-        return doctorFinderUtil
-                .find(doctorLicenseNumber)
+        Mono<Doctor> doctorMono = doctorFinderUtil.find(doctorLicenseNumber);
+        Mono<User> userMono = doctorMono
                 .flatMap(doctor -> {
                     User archivedUser = doctor.getUser().archive();
-                    return userRepository
-                            .save(archivedUser)
-                            .flatMap(oldUser -> {
-                                User updatedUser = oldUser.update(dto);
-                                return userRepository
-                                        .save(updatedUser)
-                                        .flatMap(newUser -> {
-                                            doctor.update(newUser);
-                                            return doctorRepository.save(doctor);
-                                        });
-                            });
+                    return userRepository.save(archivedUser);
+                })
+                .flatMap(archivedUser -> {
+                   User updatedUser = archivedUser.update(dto);
+                   return userRepository.save(updatedUser);
+                });
+        return doctorMono
+                .zipWith(userMono)
+                .flatMap(tuple -> {
+                    Doctor doctor = tuple.getT1();
+                    User user = tuple.getT2();
+                    doctor.update(user);
+                    return doctorRepository.save(doctor);
                 });
     }
 
