@@ -30,16 +30,21 @@ class PatientUpdatingServiceImpl implements PatientUpdatingService {
 
     @Override
     public Mono<Patient> update(@SSN String ssn, @Valid UpdatePatientRequestDto dto) {
-        return patientFinderUtil.find(ssn)
+        return patientFinderUtil
+                .find(ssn)
                 .flatMap(patient -> {
-                    User user = patient.getUser().update(dto.updateUserRequestDto());
-                    Mono<User> updatedUser = userRepository.save(user);
-                    return updatedUser
-                            .zipWith(Mono.just(dto.address()))
-                            .flatMap(tuple -> {
-                                patient.update(tuple.getT2(), tuple.getT1());
-                                return patientRepository.save(patient);
-                            });
+                    User archivedUser = patient.getUser().archive();
+                    return userRepository
+                        .save(archivedUser)
+                        .flatMap(oldUser -> {
+                            User updatedUser = oldUser.update(dto.updateUserRequestDto());
+                            return userRepository
+                                .save(updatedUser)
+                                .flatMap(newUser -> {
+                                    patient.update(dto.address(), newUser);
+                                    return patientRepository.save(patient);
+                                });
+                        });
                 });
     }
 }

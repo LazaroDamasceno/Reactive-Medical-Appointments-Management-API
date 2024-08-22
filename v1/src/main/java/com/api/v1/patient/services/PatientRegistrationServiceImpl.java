@@ -34,8 +34,11 @@ class PatientRegistrationServiceImpl implements PatientRegistrationService {
     @Override
     public Mono<PatientResponseDto> register(@Valid NewPatientRequestDto dto) {
         return userRepository
-                .findBySsn(dto.userDto().ssn())
-                .hasElement()
+                .findAll()
+                .filter(e -> e.getSsn().equals(dto.userDto().ssn())
+                    && e.getArchivingDate() == null
+                )
+                .hasElements()
                 .flatMap(exists -> {
                     if (exists) return handleDuplicatedSsn();
                     else return handleRegistration(dto);

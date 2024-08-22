@@ -33,12 +33,17 @@ class DoctorUpdatingServiceImpl implements DoctorUpdatingService {
         return doctorFinderUtil
                 .find(doctorLicenseNumber)
                 .flatMap(doctor -> {
-                    User updatedUser = doctor.getUser().update(dto);
+                    User archivedUser = doctor.getUser().archive();
                     return userRepository
-                            .save(updatedUser)
-                            .flatMap(user -> {
-                                doctor.update(user);
-                                return doctorRepository.save(doctor);
+                            .save(archivedUser)
+                            .flatMap(oldUser -> {
+                                User updatedUser = oldUser.update(dto);
+                                return userRepository
+                                        .save(updatedUser)
+                                        .flatMap(newUser -> {
+                                            doctor.update(newUser);
+                                            return doctorRepository.save(doctor);
+                                        });
                             });
                 });
     }

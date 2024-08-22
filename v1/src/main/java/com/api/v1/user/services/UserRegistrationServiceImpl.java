@@ -23,8 +23,11 @@ class UserRegistrationServiceImpl implements UserRegistrationService {
     @Override
     public Mono<UserResponseDto> register(@Valid NewUserRequestDto dto) {
         return repository
-                .findBySsn(dto.ssn())
-                .hasElement()
+                .findAll()
+                .filter(e -> e.getSsn().equals(dto.ssn())
+                        && e.getArchivingDate() == null
+                )
+                .hasElements()
                 .flatMap(exists -> {
                     if (exists) {
                         return Mono.error(DuplicatedSsnException::new);

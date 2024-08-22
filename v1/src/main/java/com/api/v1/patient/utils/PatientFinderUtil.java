@@ -23,7 +23,11 @@ public class PatientFinderUtil {
 
     public Mono<Patient> find(@SSN String ssn) {
         return userRepository
-                .findBySsn(ssn)
+                .findAll()
+                .filter(e -> e.getSsn().equals(ssn)
+                    && e.getArchivingDate() == null
+                )
+                .singleOrEmpty()
                 .switchIfEmpty(Mono.error(PatientNotFoundException::new))
                 .flatMap(patientRepository::findByUser);
     }
