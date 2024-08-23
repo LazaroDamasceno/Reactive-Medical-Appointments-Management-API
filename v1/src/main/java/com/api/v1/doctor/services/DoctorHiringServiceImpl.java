@@ -7,6 +7,7 @@ import com.api.v1.doctor.domain.DoctorRepository;
 import com.api.v1.doctor.dtos.DoctorResponseDto;
 import com.api.v1.doctor.dtos.NewDoctorRequestDto;
 import com.api.v1.doctor.exceptions.DuplicatedLicenseNumberException;
+import com.api.v1.doctor.interfaces.DoctorHiringService;
 import com.api.v1.user.builder.UserBuilder;
 import com.api.v1.user.domain.User;
 import com.api.v1.user.domain.UserRepository;

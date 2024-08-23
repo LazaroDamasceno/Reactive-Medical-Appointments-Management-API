@@ -3,7 +3,7 @@ package com.api.v1.medicalappointment.controllers;
 import com.api.v1.medicalappointment.domain.MedicalAppointment;
 import com.api.v1.medicalappointment.dtos.MedicalAppointmentDataRequestDto;
 import com.api.v1.medicalappointment.dtos.MedicalNoteRequestDto;
-import com.api.v1.medicalappointment.services.MedicalAppointmentFinishingService;
+import com.api.v1.medicalappointment.interfaces.MedicalAppointmentFinishingService;
 import jakarta.validation.Valid;
 import reactor.core.publisher.Mono;
 

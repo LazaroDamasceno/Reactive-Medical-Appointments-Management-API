@@ -6,6 +6,7 @@ import com.api.v1.medicalappointment.domain.MedicalAppointment;
 import com.api.v1.medicalappointment.domain.MedicalAppointmentRepository;
 import com.api.v1.medicalappointment.dtos.MedicalAppointmentDataRequestDto;
 import com.api.v1.medicalappointment.exceptions.MedicalAppointmentAlreadyCancelledException;
+import com.api.v1.medicalappointment.interfaces.MedicalAppointmentCancellingService;
 import com.api.v1.medicalappointment.utils.MedicalAppointmentFinderUtil;
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.utils.PatientFinderUtil;

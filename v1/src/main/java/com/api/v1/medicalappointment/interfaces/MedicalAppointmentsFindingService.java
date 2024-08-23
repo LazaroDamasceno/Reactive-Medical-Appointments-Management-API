@@ -1,4 +1,4 @@
-package com.api.v1.medicalappointment.services;
+package com.api.v1.medicalappointment.interfaces;
 
 import com.api.v1.medicalappointment.dtos.BetweenDatesRequestDto;
 import com.api.v1.medicalappointment.dtos.MedicalAppointmentResponseDto;

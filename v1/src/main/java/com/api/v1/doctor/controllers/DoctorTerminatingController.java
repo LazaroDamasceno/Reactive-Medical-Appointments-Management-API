@@ -2,7 +2,7 @@ package com.api.v1.doctor.controllers;
 
 import com.api.v1.doctor.annotations.DLN;
 import com.api.v1.doctor.domain.Doctor;
-import com.api.v1.doctor.services.DoctorTerminatingService;
+import com.api.v1.doctor.interfaces.DoctorTerminatingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

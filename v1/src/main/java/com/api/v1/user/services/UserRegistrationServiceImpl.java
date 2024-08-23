@@ -1,14 +1,15 @@
 package com.api.v1.user.services;
 
+import org.springframework.stereotype.Service;
 import com.api.v1.user.builder.UserBuilder;
 import com.api.v1.user.domain.User;
 import com.api.v1.user.domain.UserRepository;
 import com.api.v1.user.dtos.NewUserRequestDto;
 import com.api.v1.user.dtos.UserResponseDto;
 import com.api.v1.user.exceptions.DuplicatedSsnException;
+import com.api.v1.user.interfaces.UserRegistrationService;
 import com.api.v1.user.mappers.UserResponseMapper;
 import jakarta.validation.Valid;
-import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service

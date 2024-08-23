@@ -2,6 +2,7 @@ package com.api.v1.doctor.services;
 
 import com.api.v1.doctor.domain.DoctorRepository;
 import com.api.v1.doctor.dtos.DoctorResponseDto;
+import com.api.v1.doctor.interfaces.DoctorsRetrievingService;
 import com.api.v1.doctor.mappers.DoctorResponseMapper;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

@@ -3,6 +3,7 @@ package com.api.v1.doctor.services;
 import com.api.v1.doctor.annotations.DLN;
 import com.api.v1.doctor.domain.Doctor;
 import com.api.v1.doctor.domain.DoctorRepository;
+import com.api.v1.doctor.interfaces.DoctorUpdatingService;
 import com.api.v1.doctor.utils.DoctorFinderUtil;
 import com.api.v1.user.domain.User;
 import com.api.v1.user.domain.UserRepository;

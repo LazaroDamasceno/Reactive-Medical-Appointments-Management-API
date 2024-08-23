@@ -1,7 +1,7 @@
 package com.api.v1.doctor.controllers;
 
 import com.api.v1.doctor.dtos.DoctorResponseDto;
-import com.api.v1.doctor.services.DoctorsRetrievingService;
+import com.api.v1.doctor.interfaces.DoctorsRetrievingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

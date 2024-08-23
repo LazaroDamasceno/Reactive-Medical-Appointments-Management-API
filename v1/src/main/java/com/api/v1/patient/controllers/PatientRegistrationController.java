@@ -2,7 +2,7 @@ package com.api.v1.patient.controllers;
 
 import com.api.v1.patient.dtos.NewPatientRequestDto;
 import com.api.v1.patient.dtos.PatientResponseDto;
-import com.api.v1.patient.services.PatientRegistrationService;
+import com.api.v1.patient.interfaces.PatientRegistrationService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

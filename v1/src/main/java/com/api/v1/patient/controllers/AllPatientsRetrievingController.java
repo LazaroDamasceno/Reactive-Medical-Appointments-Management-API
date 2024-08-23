@@ -1,7 +1,7 @@
 package com.api.v1.patient.controllers;
 
 import com.api.v1.patient.dtos.PatientResponseDto;
-import com.api.v1.patient.services.AllPatientsRetrievingService;
+import com.api.v1.patient.interfaces.AllPatientsRetrievingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

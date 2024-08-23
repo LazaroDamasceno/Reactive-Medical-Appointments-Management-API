@@ -1,4 +1,4 @@
-package com.api.v1.user.services;
+package com.api.v1.user.interfaces;
 
 import com.api.v1.user.dtos.NewUserRequestDto;
 import com.api.v1.user.dtos.UserResponseDto;

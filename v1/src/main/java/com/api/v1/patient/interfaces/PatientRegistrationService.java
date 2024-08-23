@@ -1,4 +1,4 @@
-package com.api.v1.patient.services;
+package com.api.v1.patient.interfaces;
 
 import com.api.v1.patient.dtos.NewPatientRequestDto;
 import com.api.v1.patient.dtos.PatientResponseDto;

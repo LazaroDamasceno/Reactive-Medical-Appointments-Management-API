@@ -2,7 +2,7 @@ package com.api.v1.medicalappointment.controllers;
 
 import com.api.v1.medicalappointment.domain.MedicalAppointment;
 import com.api.v1.medicalappointment.dtos.MedicalAppointmentDataRequestDto;
-import com.api.v1.medicalappointment.services.MedicalAppointmentCancellingService;
+import com.api.v1.medicalappointment.interfaces.MedicalAppointmentCancellingService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

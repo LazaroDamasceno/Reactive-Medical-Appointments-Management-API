@@ -8,6 +8,7 @@ import com.api.v1.medicalappointment.domain.MedicalAppointmentRepository;
 import com.api.v1.medicalappointment.dtos.MedicalAppointmentResponseDto;
 import com.api.v1.medicalappointment.dtos.NewMedicalAppointmentRequestDto;
 import com.api.v1.medicalappointment.exceptions.ConflictingDateException;
+import com.api.v1.medicalappointment.interfaces.MedicalAppointmentBookingService;
 import com.api.v1.medicalappointment.mapper.MedicalAppointmentResponseMapper;
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.utils.PatientFinderUtil;

@@ -3,7 +3,7 @@ package com.api.v1.medicalappointment.controllers;
 import com.api.v1.doctor.annotations.DLN;
 import com.api.v1.medicalappointment.dtos.BetweenDatesRequestDto;
 import com.api.v1.medicalappointment.dtos.MedicalAppointmentResponseDto;
-import com.api.v1.medicalappointment.services.MedicalAppointmentsFindingService;
+import com.api.v1.medicalappointment.interfaces.MedicalAppointmentsFindingService;
 import com.api.v1.user.annotations.SSN;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

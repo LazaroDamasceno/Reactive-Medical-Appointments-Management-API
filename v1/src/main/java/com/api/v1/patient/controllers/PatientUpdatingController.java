@@ -2,7 +2,7 @@ package com.api.v1.patient.controllers;
 
 import com.api.v1.patient.domain.Patient;
 import com.api.v1.patient.dtos.UpdatePatientRequestDto;
-import com.api.v1.patient.services.PatientUpdatingService;
+import com.api.v1.patient.interfaces.PatientUpdatingService;
 import com.api.v1.user.annotations.SSN;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

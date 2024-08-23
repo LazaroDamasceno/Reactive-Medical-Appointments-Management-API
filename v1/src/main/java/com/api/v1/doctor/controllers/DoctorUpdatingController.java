@@ -2,7 +2,7 @@ package com.api.v1.doctor.controllers;
 
 import com.api.v1.doctor.annotations.DLN;
 import com.api.v1.doctor.domain.Doctor;
-import com.api.v1.doctor.services.DoctorUpdatingService;
+import com.api.v1.doctor.interfaces.DoctorUpdatingService;
 import com.api.v1.user.dtos.UpdateUserRequestDto;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

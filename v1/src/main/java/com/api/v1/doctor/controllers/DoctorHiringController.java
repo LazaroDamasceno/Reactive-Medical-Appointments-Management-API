@@ -2,7 +2,7 @@ package com.api.v1.doctor.controllers;
 
 import com.api.v1.doctor.dtos.DoctorResponseDto;
 import com.api.v1.doctor.dtos.NewDoctorRequestDto;
-import com.api.v1.doctor.services.DoctorHiringService;
+import com.api.v1.doctor.interfaces.DoctorHiringService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.api.v1.doctor.services;
+package com.api.v1.doctor.interfaces;
 
 import com.api.v1.doctor.dtos.DoctorResponseDto;
 import reactor.core.publisher.Flux;

@@ -5,6 +5,7 @@ import com.api.v1.doctor.utils.DoctorFinderUtil;
 import com.api.v1.medicalappointment.domain.MedicalAppointmentRepository;
 import com.api.v1.medicalappointment.dtos.BetweenDatesRequestDto;
 import com.api.v1.medicalappointment.dtos.MedicalAppointmentResponseDto;
+import com.api.v1.medicalappointment.interfaces.MedicalAppointmentsFindingService;
 import com.api.v1.medicalappointment.mapper.MedicalAppointmentResponseMapper;
 import com.api.v1.patient.utils.PatientFinderUtil;
 import com.api.v1.user.annotations.SSN;
