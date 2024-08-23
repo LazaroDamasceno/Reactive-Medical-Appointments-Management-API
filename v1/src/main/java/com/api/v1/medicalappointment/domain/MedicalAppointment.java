@@ -33,6 +33,9 @@ public class MedicalAppointment {
     @Field
     private String medicalNote;
 
+    @Field
+    private String createdAt = ZonedDateTime.now().toString();
+
     public MedicalAppointment(
             Doctor doctor,
             Patient patient,
@@ -80,4 +83,7 @@ public class MedicalAppointment {
         return medicalNote;
     }
 
+    public String getCreatedAt() {
+        return createdAt;
+    }
 }

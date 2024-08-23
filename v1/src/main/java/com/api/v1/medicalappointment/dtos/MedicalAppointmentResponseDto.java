@@ -9,6 +9,7 @@ public record MedicalAppointmentResponseDto(
         String bookingDate,
         String cancellationDate,
         String finishingDate,
-        String medicalNote
+        String medicalNote,
+        String createdAt
 ) {
 }

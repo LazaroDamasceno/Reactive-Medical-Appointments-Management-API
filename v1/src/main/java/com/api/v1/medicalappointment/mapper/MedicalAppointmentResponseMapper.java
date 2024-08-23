@@ -14,7 +14,8 @@ public class MedicalAppointmentResponseMapper {
                 appointment.getBookingDate(),
                 appointment.getCancellationDate(),
                 appointment.getFinishingDate(),
-                appointment.getMedicalNote()
+                appointment.getMedicalNote(),
+                appointment.getCreatedAt()
         );
     }
 
