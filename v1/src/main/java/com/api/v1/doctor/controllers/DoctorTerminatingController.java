@@ -20,7 +20,7 @@ public class DoctorTerminatingController {
         this.service = service;
     }
 
-    @PatchMapping("{doctorLicenseNumber}/termination")
+    @PatchMapping("{doctorLicenseNumber}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public Mono<Doctor> terminate(@DLN String doctorLicenseNumber) {
         return service.terminate(doctorLicenseNumber);

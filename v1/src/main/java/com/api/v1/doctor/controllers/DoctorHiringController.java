@@ -18,7 +18,7 @@ public class DoctorHiringController {
         this.service = service;
     }
 
-    @PostMapping("hiring")
+    @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public Mono<DoctorResponseDto> hire(@Valid @RequestBody NewDoctorRequestDto dto) {
         return service.hire(dto);

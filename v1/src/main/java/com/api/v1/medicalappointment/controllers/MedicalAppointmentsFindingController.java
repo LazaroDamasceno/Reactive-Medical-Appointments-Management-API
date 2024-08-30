@@ -20,109 +20,109 @@ public class MedicalAppointmentsFindingController {
         this.service = service;
     }
 
-    @GetMapping("all")
+    @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findAll() {
         return service.findAll();
     }
 
-    @GetMapping("all/active")
+    @GetMapping("active")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findActive() {
         return service.findActive();
     }
 
-    @GetMapping("all/finished")
+    @GetMapping("finished")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findFinished() {
         return service.findFinished();
     }
 
-    @GetMapping("all/cancelled")
+    @GetMapping("cancelled")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findCancelled() {
         return service.findCancelled();
     }
 
-    @GetMapping("all/by-patient/{ssn}")
+    @GetMapping("by-patient/{ssn}")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findAllByPatient(@SSN @PathVariable String ssn) {
         return service.findAllByPatient(ssn);
     }
 
-    @GetMapping("all/active/by-patient/{ssn}")
+    @GetMapping("active/by-patient/{ssn}")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findActiveByPatient(@SSN @PathVariable String ssn) {
         return service.findActiveByPatient(ssn);
     }
 
-    @GetMapping("all/finished/by-patient/{ssn}")
+    @GetMapping("finished/by-patient/{ssn}")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findFinishedByPatient(@SSN @PathVariable String ssn) {
         return service.findFinishedByPatient(ssn);
     }
 
-    @GetMapping("all/cancelled/by-patient/{ssn}")
+    @GetMapping("cancelled/by-patient/{ssn}")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findCancelledByPatient(@SSN @PathVariable String ssn) {
         return service.findCancelledByPatient(ssn);
     }
 
-    @GetMapping("all/by-patient/{ssn}/between-dates")
+    @GetMapping("by-patient/{ssn}/between-dates")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findAllByPatient(@SSN @PathVariable String ssn, @Valid @RequestBody BetweenDatesRequestDto dates) {
         return service.findAllByPatient(ssn, dates);
     }
 
-    @GetMapping("all/active/by-patient/{ssn}/between-dates")
+    @GetMapping("active/by-patient/{ssn}/between-dates")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findActiveByPatient(@SSN @PathVariable String ssn, @Valid @RequestBody BetweenDatesRequestDto dates) {
         return service.findActiveByPatient(ssn, dates);
     }
 
-    @GetMapping("all/finished/by-patient/{ssn}/between-dates")
+    @GetMapping("finished/by-patient/{ssn}/between-dates")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findFinishedByPatient(@SSN @PathVariable String ssn, @Valid @RequestBody BetweenDatesRequestDto dates) {
         return service.findFinishedByPatient(ssn, dates);
     }
 
-    @GetMapping("all/by-doctor/{doctorLicenseNumber}")
+    @GetMapping("by-doctor/{doctorLicenseNumber}")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findAllByDoctor(@DLN @PathVariable String doctorLicenseNumber) {
         return service.findAllByDoctor(doctorLicenseNumber);
     }
 
-    @GetMapping("all/active/by-doctor/{doctorLicenseNumber}")
+    @GetMapping("active/by-doctor/{doctorLicenseNumber}")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findActiveByDoctor(@DLN @PathVariable String doctorLicenseNumber) {
         return service.findActiveByDoctor(doctorLicenseNumber);
     }
 
-    @GetMapping("all/finished/by-doctor/{doctorLicenseNumber}")
+    @GetMapping("finished/by-doctor/{doctorLicenseNumber}")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findFinishedByDoctor(@DLN @PathVariable String doctorLicenseNumber) {
         return service.findFinishedByDoctor(doctorLicenseNumber);
     }
 
-    @GetMapping("all/canceled/by-doctor/{doctorLicenseNumber}")
+    @GetMapping("canceled/by-doctor/{doctorLicenseNumber}")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findCancelledByDoctor(@DLN @PathVariable String doctorLicenseNumber) {
         return service.findCancelledByDoctor(doctorLicenseNumber);
     }
 
-    @GetMapping("all/by-doctor/{doctorLicenseNumber}/between-dates")
+    @GetMapping("by-doctor/{doctorLicenseNumber}/between-dates")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findAllByDoctor(@DLN @PathVariable String doctorLicenseNumber, @Valid @RequestBody BetweenDatesRequestDto dates) {
         return service.findAllByDoctor(doctorLicenseNumber, dates);
     }
 
-    @GetMapping("all/active/by-doctor/{doctorLicenseNumber}/between-dates")
+    @GetMapping("active/by-doctor/{doctorLicenseNumber}/between-dates")
     @ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findActiveByDoctor(@DLN @PathVariable String doctorLicenseNumber, @Valid @RequestBody BetweenDatesRequestDto dates) {
         return service.findActiveByDoctor(doctorLicenseNumber, dates);
     }
 
-    @GetMapping("all/finished/by-doctor/{doctorLicenseNumber}/between-dates")
+    @GetMapping("finished/by-doctor/{doctorLicenseNumber}/between-dates")
 @   ResponseStatus(value = HttpStatus.OK)
     public Flux<MedicalAppointmentResponseDto> findFinishedByDoctor(@DLN @PathVariable String doctorLicenseNumber, @Valid @RequestBody BetweenDatesRequestDto dates) {
         return service.findFinishedByDoctor(doctorLicenseNumber, dates);

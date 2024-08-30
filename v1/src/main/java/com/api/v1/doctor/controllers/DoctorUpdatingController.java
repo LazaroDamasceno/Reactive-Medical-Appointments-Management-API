@@ -19,7 +19,7 @@ public class DoctorUpdatingController {
         this.service = service;
     }
 
-    @PutMapping("{doctorLicenseNumber}/updating")
+    @PutMapping("{doctorLicenseNumber}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public Mono<Doctor> update(
             @DLN @PathVariable String doctorLicenseNumber,

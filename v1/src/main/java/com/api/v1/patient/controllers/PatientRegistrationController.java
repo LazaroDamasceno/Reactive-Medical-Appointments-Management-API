@@ -18,7 +18,7 @@ public class PatientRegistrationController {
         this.service = service;
     }
 
-    @PostMapping("registration")
+    @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public Mono<PatientResponseDto> register(@Valid @RequestBody NewPatientRequestDto dto) {
         return service.register(dto);
